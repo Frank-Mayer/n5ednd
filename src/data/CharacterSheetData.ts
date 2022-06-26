@@ -1,5 +1,5 @@
-import { CharacterSheetModel } from "../models/CharacterSheet";
-import { EClass } from "../models/Classes/EClass";
+import { CharacterSheetModel } from "../model/CharacterSheet";
+import { EClass } from "../model/Classes/EClass";
 
 export const CharacterSheetData: CharacterSheetModel & {
   [key in keyof CharacterSheetModel]: CharacterSheetModel[key];

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { CharacterSheetData } from "../data/CharacterSheetData";
-import type { CharacterSheetModel } from "../models/CharacterSheet";
+import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
   registerComponent,
   notifyPropertyChanged,

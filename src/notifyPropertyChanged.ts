@@ -1,4 +1,4 @@
-import type { CharacterSheetModel } from "./models/CharacterSheet";
+import type { CharacterSheetModel } from "./model/CharacterSheet";
 import { CharacterSheetData } from "./data/CharacterSheetData";
 
 const dispatchMap = new Map<
