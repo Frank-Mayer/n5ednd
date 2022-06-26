@@ -51,6 +51,7 @@ export const PrimitiveView = <
 
   return (
     <input
+      key={props.index}
       type={getInputTypeFor(val)}
       value={String(val)}
       readOnly={props.readonly ?? false}
