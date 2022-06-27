@@ -30,6 +30,33 @@ export class CharacterSheetModel {
   public xp: number;
   //#endregion
 
+  //#region page 1 section 3
+  public strength: number;
+  public get strengthDice(): number {
+    return Math.floor((this.strength - 10) / 2);
+  }
+  public dexterity: number;
+  public get dexterityDice(): number {
+    return Math.floor((this.dexterity - 10) / 2);
+  }
+  public constitution: number;
+  public get constitutionDice(): number {
+    return Math.floor((this.constitution - 10) / 2);
+  }
+  public intelligence: number;
+  public get intelligenceDice(): number {
+    return Math.floor((this.intelligence - 10) / 2);
+  }
+  public wisdom: number;
+  public get wisdomDice(): number {
+    return Math.floor((this.wisdom - 10) / 2);
+  }
+  public charisma: number;
+  public get charismaDice(): number {
+    return Math.floor((this.charisma - 10) / 2);
+  }
+  //#endregion
+
   //#region page 1 section 8
   public ryo: number;
   public equipment: Array<Equipment>;
@@ -50,7 +77,14 @@ export class CharacterSheetModel {
     this.xp = data.xp ?? 0;
     this.characterClass = new (Classes.from(this.class))();
 
-    this.ryo = data.ryo ?? 0;
+    this.strength = data.strength ?? 10;
+    this.dexterity = data.dexterity ?? 10;
+    this.constitution = data.constitution ?? 10;
+    this.intelligence = data.intelligence ?? 10;
+    this.wisdom = data.wisdom ?? 10;
+    this.charisma = data.charisma ?? 10;
+
+    this.ryo = data.ryo ?? 100;
     this.equipment = data.equipment ?? new Array();
   }
 }

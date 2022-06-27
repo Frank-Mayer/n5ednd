@@ -29,13 +29,15 @@ export const EnumView = <
 
   return (
     <label>
-      <span>{props.label || camelToHuman(props.index)}</span>
+      <span>{props.label ?? camelToHuman(props.index)}</span>
       <select
         key={props.index}
         value={val}
         onChange={(ev) => {
-          CharacterSheetData[props.index] = ev.target.value as T;
-          notifyPropertyChanged();
+          if (ev.target.value !== CharacterSheetData[props.index]) {
+            CharacterSheetData[props.index] = ev.target.value as T;
+            notifyPropertyChanged();
+          }
         }}
       >
         {Object.keys(props.enum)

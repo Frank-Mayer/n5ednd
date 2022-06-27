@@ -55,7 +55,7 @@ export const PrimitiveView = <
 
   return (
     <label>
-      <span>{props.label || camelToHuman(props.index)}</span>
+      <span>{props.label ?? camelToHuman(props.index)}</span>
       <input
         key={props.index}
         type={getInputTypeFor(val)}
@@ -63,8 +63,10 @@ export const PrimitiveView = <
         readOnly={props.readonly ?? false}
         onChange={(ev) => {
           const newValue = t(ev.target.value);
-          CharacterSheetData[props.index] = newValue;
-          notifyPropertyChanged();
+          if (CharacterSheetData[props.index] !== newValue) {
+            CharacterSheetData[props.index] = newValue;
+            notifyPropertyChanged();
+          }
         }}
       />
     </label>

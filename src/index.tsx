@@ -33,7 +33,44 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView index="rank" />
         <PrimitiveView index="xp" />
       </section>
-      <section className="s03">{/* strength, dexterity, ... */}</section>
+      <section className="s03">
+        <div>
+          <span>
+            <PrimitiveView index="strength" />
+            <PrimitiveView index="strengthDice" readonly />
+          </span>
+        </div>
+        <div>
+          <span>
+            <PrimitiveView index="dexterity" />
+            <PrimitiveView index="dexterityDice" readonly />
+          </span>
+        </div>
+        <div>
+          <span>
+            <PrimitiveView index="constitution" />
+            <PrimitiveView index="constitutionDice" readonly />
+          </span>
+        </div>
+        <div>
+          <span>
+            <PrimitiveView index="intelligence" />
+            <PrimitiveView index="intelligenceDice" readonly />
+          </span>
+        </div>
+        <div>
+          <span>
+            <PrimitiveView index="wisdom" />
+            <PrimitiveView index="wisdomDice" readonly />
+          </span>
+        </div>
+        <div>
+          <span>
+            <PrimitiveView index="charisma" />
+            <PrimitiveView index="charismaDice" readonly />
+          </span>
+        </div>
+      </section>
       <section className="s04">{/* armor, initiative, speed, ... */}</section>
       <section className="s05">{/* personality, ideals, ... */}</section>
       <section className="s06">{/* attacks & jutsus */}</section>

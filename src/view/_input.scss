@@ -19,12 +19,7 @@
   > select {
     grid-area: input;
     height: 2rem;
-    border: {
-      top: none;
-      left: none;
-      right: none;
-      bottom: 1px solid rgba(color.$foreground, 0.25);
-    }
+    border-bottom: 1px solid rgba(color.$foreground, 0.25);
   }
 
   > span {
@@ -37,31 +32,60 @@
 
 @mixin side($input) {
   border: none;
-  height: 2rem;
+  @if $input == left or $input == right {
+    height: 2rem;
+
+    > input,
+    > select {
+      width: 4rem;
+    }
+
+    > span {
+      width: calc(100% - 4rem);
+    }
+  } @else {
+    height: 3rem;
+
+    > *,
+    > * > * {
+      text-align: center;
+      display: block;
+    }
+
+    > span {
+      width: 100%;
+    }
+
+    > input,
+    > select {
+      width: 5rem;
+    }
+  }
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   justify-content: flex-end;
   gap: 0.5vw;
 
-  > input,
-  > select {
-    width: 4rem;
-  }
-
-  > span {
-    width: calc(100% - 4rem);
-  }
-
   @if $input == "right" {
     flex-direction: row;
     > span {
       text-align: right;
     }
-  } @else {
+  } @else if $input == "left" {
     flex-direction: row-reverse;
     > span {
       text-align: left;
+    }
+  } @else if $input == "bottom" {
+    flex-direction: column;
+    > span {
+      text-align: center;
+    }
+  } @else if $input == "top" {
+    flex-direction: column-reverse;
+    > span {
+      text-align: center;
     }
   }
 }
