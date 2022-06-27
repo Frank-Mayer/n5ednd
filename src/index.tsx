@@ -7,6 +7,7 @@ import { EClass } from "./model/Classes/EClass";
 import { EClan } from "./model/Clans/EClan";
 import "./view/reset.scss";
 import "./view/page01.scss";
+import { Upload } from "./save";
 
 const rootEl = document.getElementById("root");
 
@@ -16,6 +17,7 @@ if (!rootEl) {
 
 ReactDOM.createRoot(rootEl!).render(
   <>
+    <Upload />
     <div className="p01">
       <section className="s01">
         <PrimitiveView index="proficiencyBonus" readonly />

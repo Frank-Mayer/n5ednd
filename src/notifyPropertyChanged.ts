@@ -1,5 +1,5 @@
 import type { CharacterSheetModel } from "./model/CharacterSheet";
-import { CharacterSheetData } from "./data/CharacterSheetData";
+import { getCharacterSheetData } from "./data/CharacterSheetData";
 
 const dispatchMap = new Map<
   keyof CharacterSheetModel,
@@ -8,7 +8,7 @@ const dispatchMap = new Map<
 
 export const notifyPropertyChanged = () => {
   for (const [key, dispatch] of dispatchMap) {
-    dispatch(CharacterSheetData[key]);
+    dispatch(getCharacterSheetData()[key]);
   }
 };
 

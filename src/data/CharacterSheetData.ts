@@ -1,10 +1,15 @@
 import { CharacterSheetModel } from "../model/CharacterSheet";
-import { EClass } from "../model/Classes/EClass";
 
-export const CharacterSheetData: CharacterSheetModel & {
+let characterSheetData: CharacterSheetModel & {
   [key in keyof CharacterSheetModel]: CharacterSheetModel[key];
-} = new CharacterSheetModel({
-  name: "Naruto",
-  level: 4,
-  class: EClass["Scout-Nin"],
-});
+};
+
+export const setCharacterSheetData = (data: Partial<CharacterSheetModel>) => {
+  characterSheetData = new CharacterSheetModel(data);
+};
+
+export const getCharacterSheetData = (): CharacterSheetModel & {
+  [key in keyof CharacterSheetModel]: CharacterSheetModel[key];
+} => characterSheetData;
+
+setCharacterSheetData({});

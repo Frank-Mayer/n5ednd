@@ -5,6 +5,16 @@ import type { IClass } from "./Classes/IClass";
 import * as Classes from "./Classes/index";
 import { Equipment } from "./Equipment";
 
+const importEnum = (e: any, value: string | number | undefined, def: any) => {
+  if (value === undefined) {
+    return def;
+  } else if (isNaN(parseInt(String(value)))) {
+    return e[value];
+  } else {
+    return value;
+  }
+};
+
 export class CharacterSheetModel {
   private readonly characterClass: IClass;
 
@@ -63,16 +73,22 @@ export class CharacterSheetModel {
   //#endregion
 
   constructor(data: Partial<CharacterSheetModel>) {
+    console.debug("CharacterSheetModel.constructor", data);
+
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
     this.willOfFire = data.willOfFire ?? 0;
 
     this.name = data.name ?? "Naruto";
-    this.clan = data.clan ?? EClan.Uzumaki;
+    this.clan = importEnum(EClan, data.clan, EClan.Uzumaki);
     this.playerName = data.playerName ?? "Player 01";
-    this.class = data.class ?? EClass["Scout-Nin"];
+    this.class = importEnum(EClass, data.class, EClass["Scout-Nin"]);
     this.level = data.level ?? 1;
-    this.background = data.background ?? EBackground["Trouble Maker"];
+    this.background = importEnum(
+      EBackground,
+      data.background,
+      EBackground["Trouble Maker"]
+    );
     this.rank = data.rank ?? 1;
     this.xp = data.xp ?? 0;
     this.characterClass = new (Classes.from(this.class))();

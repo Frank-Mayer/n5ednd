@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { CharacterSheetData } from "../data/CharacterSheetData";
+import { getCharacterSheetData } from "../data/CharacterSheetData";
 import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
   registerComponent,
@@ -20,7 +20,7 @@ export const EnumView = <
   props: Props<K>
 ) => {
   const [val, dispatch] = useState<number>(
-    CharacterSheetData[props.index] as number
+    getCharacterSheetData()[props.index] as number
   );
 
   registerComponent(props.index, (x: number) => {
@@ -34,8 +34,9 @@ export const EnumView = <
         key={props.index}
         value={val}
         onChange={(ev) => {
-          if (ev.target.value !== CharacterSheetData[props.index]) {
-            CharacterSheetData[props.index] = ev.target.value as T;
+          const newValue = Number(ev.target.value);
+          if (newValue !== getCharacterSheetData()[props.index]) {
+            getCharacterSheetData()[props.index] = newValue as T;
             notifyPropertyChanged();
           }
         }}

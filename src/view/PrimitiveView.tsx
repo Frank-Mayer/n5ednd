@@ -1,5 +1,5 @@
 import React from "react";
-import { CharacterSheetData } from "../data/CharacterSheetData";
+import { getCharacterSheetData } from "../data/CharacterSheetData";
 import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
   registerComponent,
@@ -45,7 +45,7 @@ export const PrimitiveView = <
   props: Props<K>
 ) => {
   const [val, dispatch] = React.useState<T>(
-    CharacterSheetData[props.index] as T
+    getCharacterSheetData()[props.index] as T
   );
   const t = typeMap[typeof val];
 
@@ -63,8 +63,8 @@ export const PrimitiveView = <
         readOnly={props.readonly ?? false}
         onChange={(ev) => {
           const newValue = t(ev.target.value);
-          if (CharacterSheetData[props.index] !== newValue) {
-            CharacterSheetData[props.index] = newValue;
+          if (getCharacterSheetData()[props.index] !== newValue) {
+            getCharacterSheetData()[props.index] = newValue;
             notifyPropertyChanged();
           }
         }}
