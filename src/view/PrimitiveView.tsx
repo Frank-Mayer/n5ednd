@@ -1,14 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
 import { CharacterSheetData } from "../data/CharacterSheetData";
 import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
   registerComponent,
   notifyPropertyChanged,
 } from "../notifyPropertyChanged";
+import { camelToHuman } from "./lib/string";
 
 interface Props<K extends keyof CharacterSheetModel> {
   index: K;
   readonly?: boolean;
+  label?: string;
 }
 
 const typeMap = {
@@ -42,7 +44,9 @@ export const PrimitiveView = <
 >(
   props: Props<K>
 ) => {
-  const [val, dispatch] = useState<T>(CharacterSheetData[props.index] as T);
+  const [val, dispatch] = React.useState<T>(
+    CharacterSheetData[props.index] as T
+  );
   const t = typeMap[typeof val];
 
   registerComponent(props.index, (x: T) => {
@@ -50,16 +54,19 @@ export const PrimitiveView = <
   });
 
   return (
-    <input
-      key={props.index}
-      type={getInputTypeFor(val)}
-      value={String(val)}
-      readOnly={props.readonly ?? false}
-      onChange={(ev) => {
-        const newValue = t(ev.target.value);
-        CharacterSheetData[props.index] = newValue;
-        notifyPropertyChanged();
-      }}
-    />
+    <label>
+      <span>{props.label || camelToHuman(props.index)}</span>
+      <input
+        key={props.index}
+        type={getInputTypeFor(val)}
+        value={String(val)}
+        readOnly={props.readonly ?? false}
+        onChange={(ev) => {
+          const newValue = t(ev.target.value);
+          CharacterSheetData[props.index] = newValue;
+          notifyPropertyChanged();
+        }}
+      />
+    </label>
   );
 };

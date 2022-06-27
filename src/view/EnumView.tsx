@@ -5,10 +5,12 @@ import {
   registerComponent,
   notifyPropertyChanged,
 } from "../notifyPropertyChanged";
+import { camelToHuman } from "./lib/string";
 
 interface Props<K extends keyof CharacterSheetModel> {
   index: K;
   enum: any;
+  label?: string;
 }
 
 export const EnumView = <
@@ -26,23 +28,26 @@ export const EnumView = <
   });
 
   return (
-    <select
-      key={props.index}
-      value={val}
-      onChange={(ev) => {
-        CharacterSheetData[props.index] = ev.target.value as T;
-        notifyPropertyChanged();
-      }}
-    >
-      {Object.keys(props.enum)
-        .filter((x) => !isNaN(parseInt(x)))
-        .map((key) => {
-          return (
-            <option key={props.index + key} value={key}>
-              {(props.enum as any)[key]}
-            </option>
-          );
-        })}
-    </select>
+    <label>
+      <span>{props.label || camelToHuman(props.index)}</span>
+      <select
+        key={props.index}
+        value={val}
+        onChange={(ev) => {
+          CharacterSheetData[props.index] = ev.target.value as T;
+          notifyPropertyChanged();
+        }}
+      >
+        {Object.keys(props.enum)
+          .filter((x) => !isNaN(parseInt(x)))
+          .map((key) => {
+            return (
+              <option key={props.index + key} value={key}>
+                {(props.enum as any)[key]}
+              </option>
+            );
+          })}
+      </select>
+    </label>
   );
 };

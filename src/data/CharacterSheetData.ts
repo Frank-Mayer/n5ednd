@@ -4,7 +4,7 @@ import { EClass } from "../model/Classes/EClass";
 export const CharacterSheetData: CharacterSheetModel & {
   [key in keyof CharacterSheetModel]: CharacterSheetModel[key];
 } = new CharacterSheetModel({
-  name: "Yorunokijin",
+  name: "Naruto",
   level: 4,
-  characterClass: EClass["Hunter-Nin"],
+  class: EClass["Scout-Nin"],
 });

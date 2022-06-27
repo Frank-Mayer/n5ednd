@@ -1,0 +1,28 @@
+* {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  font-size: 1.5vw;
+  font-family: system-ui, -apple-system, sans-serif;
+  overflow: hidden;
+}
+
+// debug
+// @function repeat($str, $n) {
+//   $c: "";
+//   @for $i from 1 through $n {
+//     $c: $c + $str;
+//   }
+//   @return $c;
+// }
+
+// @for $i from 1 through 100 {
+//   #{":root" + repeat(">*", $i)} {
+//     $r: random(255);
+//     $g: random(255);
+//     $b: random(255);
+//     background-color: rgba($r, $g, $b, 0.01 * $i) !important;
+//     border: 1px solid rgba($r, $g, $b, 0.1 * $i) !important;
+//   }
+// }

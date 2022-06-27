@@ -5,6 +5,8 @@ import { EnumView } from "./view/EnumView";
 import { EBackground } from "./model/Backgrounds/EBackground";
 import { EClass } from "./model/Classes/EClass";
 import { EClan } from "./model/Clans/EClan";
+import "./view/reset.scss";
+import "./view/page01.scss";
 
 const rootEl = document.getElementById("root");
 
@@ -22,7 +24,7 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView index="willOfFire" readonly />
       </section>
       <section className="s02">
-        <PrimitiveView index="name" />
+        <PrimitiveView index="name" label="Character Name" />
         <EnumView enum={EClan} index="clan" />
         <PrimitiveView index="playerName" />
         <EnumView enum={EClass} index="class" />
@@ -35,8 +37,8 @@ ReactDOM.createRoot(rootEl!).render(
       <section className="s04">{/* armor, initiative, speed, ... */}</section>
       <section className="s05">{/* personality, ideals, ... */}</section>
       <section className="s06">{/* attacks & jutsus */}</section>
-      <section className="s07">{/* equipment */}</section>
-      <section className="s08">{/* features, tatins, proficiencies */}</section>
+      <section className="s07">{/* features, tatins, proficiencies */}</section>
+      <section className="s08">{/* equipment */}</section>
     </div>
   </>
 );
