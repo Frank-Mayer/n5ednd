@@ -5025,6 +5025,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"lzwcompress@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "lzwcompress@npm:1.1.0"
+  checksum: 8dd0e9bab054687d1b39f10863f84e93a75d87f17e69bbbba273c0958efa6e0282efbf3a1e9ebf714bd6383d2dc7d708a23ff459ba506f388c812d370533af01
+  languageName: node
+  linkType: hard
+
 "magic-string@npm:^0.22.4":
   version: 0.22.5
   resolution: "magic-string@npm:0.22.5"
@@ -5346,6 +5353,7 @@ __metadata:
   dependencies:
     "@types/react": ^18.0.14
     "@types/react-dom": ^18.0.5
+    lzwcompress: ^1.1.0
     parcel-bundler: ^1.12.5
     react: ^18.2.0
     react-dom: ^18.2.0
