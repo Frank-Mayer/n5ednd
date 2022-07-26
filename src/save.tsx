@@ -13,7 +13,7 @@ const save = () => {
   const data = getCharacterSheetData();
   const json = JSON.stringify(data);
   const compr = lzwCompress
-    .pack(btoa(json))
+    .pack(json)
     .map((x) => String.fromCharCode(x))
     .join("");
   const blob = new Blob([compr], { type: "text/plain" });
@@ -34,7 +34,7 @@ const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
     .text()
     .then((text) => {
       const data = JSON.parse(
-        atob(lzwCompress.unpack(text.split("").map((x) => x.charCodeAt(0))))
+        lzwCompress.unpack(text.split("").map((x) => x.charCodeAt(0)))
       );
       setCharacterSheetData(data);
     })

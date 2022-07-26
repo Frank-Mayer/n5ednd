@@ -5,9 +5,10 @@ import { EnumView } from "./view/EnumView";
 import { EBackground } from "./model/Backgrounds/EBackground";
 import { EClass } from "./model/Classes/EClass";
 import { EClan } from "./model/Clans/EClan";
-import "./view/reset.scss";
 import "./view/page01.scss";
 import { Upload } from "./save";
+import { ListView } from "./view/ListView";
+import { notifyPropertyChanged } from "./notifyPropertyChanged";
 
 const rootEl = document.getElementById("root");
 
@@ -36,42 +37,87 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView index="xp" />
       </section>
       <section className="s03">
-        <div>
-          <span>
-            <PrimitiveView index="strength" />
-            <PrimitiveView index="strengthDice" readonly />
-          </span>
-        </div>
-        <div>
-          <span>
-            <PrimitiveView index="dexterity" />
-            <PrimitiveView index="dexterityDice" readonly />
-          </span>
-        </div>
-        <div>
-          <span>
-            <PrimitiveView index="constitution" />
-            <PrimitiveView index="constitutionDice" readonly />
-          </span>
-        </div>
-        <div>
-          <span>
-            <PrimitiveView index="intelligence" />
-            <PrimitiveView index="intelligenceDice" readonly />
-          </span>
-        </div>
-        <div>
-          <span>
-            <PrimitiveView index="wisdom" />
-            <PrimitiveView index="wisdomDice" readonly />
-          </span>
-        </div>
-        <div>
-          <span>
-            <PrimitiveView index="charisma" />
-            <PrimitiveView index="charismaDice" readonly />
-          </span>
-        </div>
+        <table>
+          <tbody>
+            <tr>
+              <th>
+                <PrimitiveView index="strength" />
+                <PrimitiveView index="strengthDice" readonly />
+              </th>
+              <td>
+                <ListView index="strengthProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
+            </tr>
+            <tr>
+              <th>
+                <PrimitiveView index="dexterity" />
+                <PrimitiveView index="dexterityDice" readonly />
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <PrimitiveView index="constitution" />
+                <PrimitiveView index="constitutionDice" readonly />
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <PrimitiveView index="intelligence" />
+                <PrimitiveView index="intelligenceDice" readonly />
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <PrimitiveView index="wisdom" />
+                <PrimitiveView index="wisdomDice" readonly />
+              </th>
+            </tr>
+            <tr>
+              <th>
+                <PrimitiveView index="charisma" />
+                <PrimitiveView index="charismaDice" readonly />
+              </th>
+            </tr>
+          </tbody>
+        </table>
       </section>
       <section className="s04">{/* armor, initiative, speed, ... */}</section>
       <section className="s05">{/* personality, ideals, ... */}</section>

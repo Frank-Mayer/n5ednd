@@ -8,7 +8,12 @@ const dispatchMap = new Map<
 
 export const notifyPropertyChanged = () => {
   for (const [key, dispatch] of dispatchMap) {
-    dispatch(getCharacterSheetData()[key]);
+    const val = getCharacterSheetData()[key];
+    if (typeof val === "object") {
+      dispatch(JSON.parse(JSON.stringify(val)));
+    } else {
+      dispatch(val);
+    }
   }
 };
 

@@ -1,4 +1,4 @@
-@use "color";
+@use "../style/color";
 
 @mixin underline {
   border: none;
@@ -19,19 +19,27 @@
   > select {
     grid-area: input;
     height: 2rem;
-    border-bottom: 1px solid rgba(color.$foreground, 0.25);
+    border-bottom: 1px solid rgba(color.$foreground, 0.5);
   }
 
   > span {
     height: auto;
     border: none;
     grid-area: label;
-    color: rgba(color.$foreground, 0.25);
+    color: rgba(color.$foreground, 0.5);
   }
 }
 
 @mixin side($input) {
   border: none;
+  > input[type="number"] {
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+  }
   @if $input == left or $input == right {
     height: 2rem;
 
@@ -43,6 +51,7 @@
 
     > span {
       width: calc(100% - 4rem);
+      height: fit-content;
     }
   } @else {
     height: 3rem;
@@ -66,7 +75,7 @@
   align-items: center;
   flex-wrap: nowrap;
   justify-content: flex-end;
-  gap: 0.5vw;
+  gap: 0.5vmin;
 
   @if $input == "right" {
     flex-direction: row;

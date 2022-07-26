@@ -1,0 +1,87 @@
+@use "color";
+@import "reset";
+@import "JetBrainsMono";
+
+$max-page-width: 800px;
+
+:root {
+  --page-width: min(#{$max-page-width}, 100vw);
+  padding: 1rem;
+  background: {
+    color: color.$background;
+    image: url(../img/background.webp);
+    size: cover;
+    position: center;
+    repeat: no-repeat;
+    attachment: fixed;
+  }
+  color: color.$foreground;
+}
+
+div#root > input {
+  background-color: rgba(color.$background, 0.5);
+}
+
+* {
+  font-family: "JetBrains Mono", monospace !important;
+  font-size: calc(var(--page-width) * 0.015);
+  color: color.$foreground;
+  text-rendering: optimizelegibility;
+  image-rendering: optimizequality;
+  shape-rendering: geometricprecision;
+  color-scheme: dark !important;
+}
+
+input {
+  font-size: 1em;
+
+  &[type="checkbox"] {
+    width: 1em;
+    height: 1em;
+  }
+}
+
+input:not([type="checkbox"]):read-only {
+  cursor: not-allowed;
+}
+
+div#root {
+  padding: {
+    top: 10rem;
+    bottom: 16rem;
+  }
+
+  // pages
+  > div {
+    padding: 1rem;
+    max-width: $max-page-width;
+    margin: 0 auto;
+    background-color: rgba(color.$background, 0.75);
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+
+    input,
+    select {
+      background-color: transparent;
+    }
+  }
+}
+
+// debug
+// @function repeat($str, $n) {
+//   $c: "";
+//   @for $i from 1 through $n {
+//     $c: $c + $str;
+//   }
+//   @return $c;
+// }
+
+// @for $i from 1 through 100 {
+//   #{":root" + repeat(">*", $i)} {
+//     $r: random(255);
+//     $g: random(255);
+//     $b: random(255);
+//     background-color: rgba($r, $g, $b, 0.01 * $i) !important;
+//     border: 1px solid rgba($r, $g, $b, 0.1 * $i) !important;
+//   }
+// }

@@ -13,7 +13,7 @@ interface Props<K extends keyof CharacterSheetModel> {
   label?: string;
 }
 
-const typeMap = {
+export const typeMap = {
   string: (x: any) => (typeof x === "string" ? x : String(x)),
   number: (x: any) => (typeof x === "number" ? x : Number(x)),
   bigint: (x: any) => (typeof x === "bigint" ? x : BigInt(x)),
@@ -24,7 +24,7 @@ const typeMap = {
   function: (x: any) => (typeof x === "function" ? x : Function(x)),
 };
 
-const getInputTypeFor = (value: any) => {
+export const getInputTypeFor = (value: any) => {
   switch (typeof value) {
     case "bigint":
     case "number":
@@ -50,6 +50,7 @@ export const PrimitiveView = <
   const t = typeMap[typeof val];
 
   registerComponent(props.index, (x: T) => {
+    if (x !== val) console.debug(props.index, x, val);
     dispatch(t(x));
   });
 

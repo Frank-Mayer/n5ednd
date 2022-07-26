@@ -3,7 +3,7 @@ $gap: 8px;
 
 .p01 {
   display: grid;
-  grid-template-columns: repeat(3, 33.33333vw);
+  grid-template-columns: repeat(3, calc(33.333% - #{$gap}));
   grid-template-rows: 1fr 3fr repeat(2, 2fr);
   grid-column-gap: $gap;
   grid-row-gap: $gap;
@@ -90,32 +90,57 @@ $gap: 8px;
 
   > .s03 {
     grid-area: 2 / 1 / 4 / 2;
-    display: grid;
-    grid-template-rows: repeat(6, auto);
-    align-content: space-between;
-    > div {
-      > span {
-        > :nth-child(1) {
-          @include input.side(bottom);
-          height: 4rem !important;
-          > input {
-            font-size: 2em;
-          }
-        }
-        > :nth-child(2) {
-          width: 100%;
-          display: block;
 
-          > span {
-            display: none;
+    > table > tbody > tr {
+      > th {
+        > label {
+          width: fit-content;
+
+          margin: {
+            left: auto;
+            right: auto;
           }
 
-          > input {
-            text-align: center;
-            width: 100%;
-            display: block;
+          text-align: center;
+
+          &:nth-child(1) {
+            height: 4rem !important;
+            @include input.side(bottom);
+            > span {
+              width: fit-content;
+            }
+            > input {
+              font-size: 2em;
+            }
+          }
+
+          &:nth-child(2) {
+            > span {
+              display: none;
+              visibility: collapse;
+            }
+            > input {
+              width: 5rem;
+              text-align: center;
+
+              &::-webkit-outer-spin-button,
+              &::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+              }
+              -moz-appearance: textfield;
+            }
           }
         }
+      }
+    }
+
+    > ul,
+    > ol {
+      grid-area: 1 / 2 / 2 / 3;
+      > li,
+      > li > * {
+        font-size: 0.85em;
       }
     }
   }

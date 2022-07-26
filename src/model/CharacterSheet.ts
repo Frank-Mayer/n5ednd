@@ -15,6 +15,22 @@ const importEnum = (e: any, value: string | number | undefined, def: any) => {
   }
 };
 
+type Proficiencies = {
+  label: string;
+  value: number;
+  p: boolean;
+  h: boolean;
+  e: boolean;
+};
+
+const emptyProficiency = (label: string = "Saving Throw"): Proficiencies => ({
+  label,
+  value: 0,
+  p: false,
+  h: false,
+  e: false,
+});
+
 export class CharacterSheetModel {
   private readonly characterClass: IClass;
 
@@ -45,6 +61,27 @@ export class CharacterSheetModel {
   public get strengthDice(): number {
     return Math.floor((this.strength - 10) / 2);
   }
+  public _strengthProficiencies: Array<Proficiencies>;
+  public set strengthProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.strengthDice;
+      } else {
+        item.value = this.strengthDice;
+      }
+    }
+    this._strengthProficiencies = value;
+  }
+  public get strengthProficiencies() {
+    for (const item of this._strengthProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.strengthDice;
+      } else {
+        item.value = this.strengthDice;
+      }
+    }
+    return this._strengthProficiencies;
+  }
   public dexterity: number;
   public get dexterityDice(): number {
     return Math.floor((this.dexterity - 10) / 2);
@@ -73,8 +110,6 @@ export class CharacterSheetModel {
   //#endregion
 
   constructor(data: Partial<CharacterSheetModel>) {
-    console.debug("CharacterSheetModel.constructor", data);
-
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
     this.willOfFire = data.willOfFire ?? 0;
@@ -94,6 +129,11 @@ export class CharacterSheetModel {
     this.characterClass = new (Classes.from(this.class))();
 
     this.strength = data.strength ?? 10;
+    this._strengthProficiencies = data._strengthProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Athletics"),
+      emptyProficiency("Martal Arts"),
+    ];
     this.dexterity = data.dexterity ?? 10;
     this.constitution = data.constitution ?? 10;
     this.intelligence = data.intelligence ?? 10;
