@@ -50,7 +50,6 @@ export const PrimitiveView = <
   const t = typeMap[typeof val];
 
   registerComponent(props.index, (x: T) => {
-    if (x !== val) console.debug(props.index, x, val);
     dispatch(t(x));
   });
 

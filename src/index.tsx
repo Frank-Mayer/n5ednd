@@ -91,30 +91,235 @@ ReactDOM.createRoot(rootEl!).render(
                 <PrimitiveView index="dexterity" />
                 <PrimitiveView index="dexterityDice" readonly />
               </th>
+              <td>
+                <ListView index="dexterityProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
             </tr>
             <tr>
               <th>
                 <PrimitiveView index="constitution" />
                 <PrimitiveView index="constitutionDice" readonly />
               </th>
+              <td>
+                <ListView index="constitutionProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
             </tr>
             <tr>
               <th>
                 <PrimitiveView index="intelligence" />
                 <PrimitiveView index="intelligenceDice" readonly />
               </th>
+              <td>
+                <ListView index="intelligenceProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
             </tr>
             <tr>
               <th>
                 <PrimitiveView index="wisdom" />
                 <PrimitiveView index="wisdomDice" readonly />
               </th>
+              <td>
+                <ListView index="wisdomProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
             </tr>
             <tr>
               <th>
                 <PrimitiveView index="charisma" />
                 <PrimitiveView index="charismaDice" readonly />
               </th>
+              <td>
+                <ListView index="charismaProficiencies">
+                  {({ item, key }) => (
+                    <>
+                      <input
+                        key={key + ".p"}
+                        type="checkbox"
+                        checked={item.p}
+                        onChange={(ev) => {
+                          item.p = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".h"}
+                        type="checkbox"
+                        checked={item.h}
+                        onChange={(ev) => {
+                          item.h = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <input
+                        key={key + ".e"}
+                        type="checkbox"
+                        checked={item.e}
+                        onChange={(ev) => {
+                          item.e = ev.target.checked;
+                          notifyPropertyChanged();
+                        }}
+                      />
+                      <span>{item.value}</span>
+                      {item.label === "Saving Throw" ? (
+                        <b>{item.label}</b>
+                      ) : (
+                        <span>{item.label}</span>
+                      )}
+                    </>
+                  )}
+                </ListView>
+              </td>
             </tr>
           </tbody>
         </table>

@@ -91,56 +91,62 @@ $gap: 8px;
   > .s03 {
     grid-area: 2 / 1 / 4 / 2;
 
-    > table > tbody > tr {
-      > th {
-        > label {
-          width: fit-content;
+    > table {
+      border-collapse: separate;
+      border-spacing: 0.2rem 1rem;
+      > tbody > tr {
+        > th {
+          > label {
+            width: fit-content;
 
-          margin: {
-            left: auto;
-            right: auto;
-          }
-
-          text-align: center;
-
-          &:nth-child(1) {
-            height: 4rem !important;
-            @include input.side(bottom);
-            > span {
-              width: fit-content;
+            margin: {
+              left: auto;
+              right: auto;
             }
-            > input {
-              font-size: 2em;
-            }
-          }
 
-          &:nth-child(2) {
-            > span {
-              display: none;
-              visibility: collapse;
-            }
-            > input {
-              width: 5rem;
-              text-align: center;
+            text-align: center;
 
-              &::-webkit-outer-spin-button,
-              &::-webkit-inner-spin-button {
-                -webkit-appearance: none;
-                margin: 0;
+            &:nth-child(1) {
+              height: 4rem !important;
+              @include input.side(bottom);
+              > span {
+                width: fit-content;
               }
-              -moz-appearance: textfield;
+              > input {
+                font-size: 2em;
+              }
+            }
+
+            &:nth-child(2) {
+              > span {
+                display: none;
+                visibility: collapse;
+              }
+              > input {
+                width: 5rem;
+                text-align: center;
+
+                &::-webkit-outer-spin-button,
+                &::-webkit-inner-spin-button {
+                  -webkit-appearance: none;
+                  margin: 0;
+                }
+                -moz-appearance: textfield;
+              }
             }
           }
         }
-      }
-    }
 
-    > ul,
-    > ol {
-      grid-area: 1 / 2 / 2 / 3;
-      > li,
-      > li > * {
-        font-size: 0.85em;
+        > td {
+          > ul,
+          > ol {
+            grid-area: 1 / 2 / 2 / 3;
+            > li,
+            > li > * {
+              font-size: 0.85em;
+            }
+          }
+        }
       }
     }
   }

@@ -86,21 +86,126 @@ export class CharacterSheetModel {
   public get dexterityDice(): number {
     return Math.floor((this.dexterity - 10) / 2);
   }
+  public _dexterityProficiencies: Array<Proficiencies>;
+  public get dexterityProficiencies() {
+    for (const item of this._dexterityProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.dexterityDice;
+      } else {
+        item.value = this.dexterityDice;
+      }
+    }
+    return this._dexterityProficiencies;
+  }
+  public set dexterityProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.dexterityDice;
+      } else {
+        item.value = this.dexterityDice;
+      }
+    }
+    this._dexterityProficiencies = value;
+  }
   public constitution: number;
   public get constitutionDice(): number {
     return Math.floor((this.constitution - 10) / 2);
+  }
+  public _constitutionProficiencies: Array<Proficiencies>;
+  public get constitutionProficiencies() {
+    for (const item of this._constitutionProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.constitutionDice;
+      } else {
+        item.value = this.constitutionDice;
+      }
+    }
+    return this._constitutionProficiencies;
+  }
+  public set constitutionProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.constitutionDice;
+      } else {
+        item.value = this.constitutionDice;
+      }
+    }
+    this._constitutionProficiencies = value;
   }
   public intelligence: number;
   public get intelligenceDice(): number {
     return Math.floor((this.intelligence - 10) / 2);
   }
+  public _intelligenceProficiencies: Array<Proficiencies>;
+  public get intelligenceProficiencies() {
+    for (const item of this._intelligenceProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.intelligenceDice;
+      } else {
+        item.value = this.intelligenceDice;
+      }
+    }
+    return this._intelligenceProficiencies;
+  }
+  public set intelligenceProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.intelligenceDice;
+      } else {
+        item.value = this.intelligenceDice;
+      }
+    }
+    this._intelligenceProficiencies = value;
+  }
   public wisdom: number;
   public get wisdomDice(): number {
     return Math.floor((this.wisdom - 10) / 2);
   }
+  public _wisdomProficiencies: Array<Proficiencies>;
+  public get wisdomProficiencies() {
+    for (const item of this._wisdomProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.wisdomDice;
+      } else {
+        item.value = this.wisdomDice;
+      }
+    }
+    return this._wisdomProficiencies;
+  }
+  public set wisdomProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.wisdomDice;
+      } else {
+        item.value = this.wisdomDice;
+      }
+    }
+    this._wisdomProficiencies = value;
+  }
   public charisma: number;
   public get charismaDice(): number {
     return Math.floor((this.charisma - 10) / 2);
+  }
+  public _charismaProficiencies: Array<Proficiencies>;
+  public get charismaProficiencies() {
+    for (const item of this._charismaProficiencies) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.charismaDice;
+      } else {
+        item.value = this.charismaDice;
+      }
+    }
+    return this._charismaProficiencies;
+  }
+  public set charismaProficiencies(value: Array<Proficiencies>) {
+    for (const item of value) {
+      if (item.p) {
+        item.value = this.proficiencyBonus + this.charismaDice;
+      } else {
+        item.value = this.charismaDice;
+      }
+    }
+    this._charismaProficiencies = value;
   }
   //#endregion
 
@@ -135,10 +240,44 @@ export class CharacterSheetModel {
       emptyProficiency("Martal Arts"),
     ];
     this.dexterity = data.dexterity ?? 10;
+    this._dexterityProficiencies = data._dexterityProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Acrobatics"),
+      emptyProficiency("Sleight of Hand"),
+      emptyProficiency("Stealth"),
+    ];
     this.constitution = data.constitution ?? 10;
+    this._constitutionProficiencies = data._constitutionProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Chakra Control"),
+    ];
     this.intelligence = data.intelligence ?? 10;
+    this._intelligenceProficiencies = data._intelligenceProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Crafting"),
+      emptyProficiency("History"),
+      emptyProficiency("Investigation"),
+      emptyProficiency("Nature"),
+      emptyProficiency("Ninshou"),
+    ];
     this.wisdom = data.wisdom ?? 10;
+    this._wisdomProficiencies = data._wisdomProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Animal Handling"),
+      emptyProficiency("Illusion"),
+      emptyProficiency("Insight"),
+      emptyProficiency("Medicine"),
+      emptyProficiency("Perception"),
+      emptyProficiency("Survival"),
+    ];
     this.charisma = data.charisma ?? 10;
+    this._charismaProficiencies = data._charismaProficiencies ?? [
+      emptyProficiency(),
+      emptyProficiency("Deception"),
+      emptyProficiency("Intimidation"),
+      emptyProficiency("Performance"),
+      emptyProficiency("Persuasion"),
+    ];
 
     this.ryo = data.ryo ?? 100;
     this.equipment = data.equipment ?? new Array();

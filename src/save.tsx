@@ -8,6 +8,8 @@ import { EClan } from "./model/Clans/EClan";
 import { EClass } from "./model/Classes/EClass";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import * as lzwCompress from "lzwcompress";
+import { openDB } from "idb";
+import { CharacterSheetModel } from "./model/CharacterSheet";
 
 const save = () => {
   const data = getCharacterSheetData();
@@ -68,5 +70,40 @@ window.addEventListener(
     passive: false,
   }
 );
+
+const characterSheetObjectStore = "character-sheet";
+
+export const dbProm = openDB<CharacterSheetModel>("naruto", 1, {
+  upgrade(db) {
+    if (!db.objectStoreNames.contains(characterSheetObjectStore)) {
+      db.createObjectStore(characterSheetObjectStore);
+    }
+  },
+});
+
+dbProm.then((db) => {
+  db.get(characterSheetObjectStore, 1)
+    .then((data) => {
+      if (data) {
+        setCharacterSheetData(data);
+        notifyPropertyChanged();
+      }
+    })
+    .catch(console.error);
+
+  const saveInterv = window.setInterval(() => {
+    const data = { id: 1, ...getCharacterSheetData() };
+    db.transaction(characterSheetObjectStore, "readwrite");
+    db.put(characterSheetObjectStore, data, 1)
+      .then(() => {
+        console.log("saved");
+      })
+      .catch((err) => {
+        window.clearInterval(saveInterv);
+        console.error(err);
+        alert(err);
+      });
+  }, 2000);
+});
 
 export {};

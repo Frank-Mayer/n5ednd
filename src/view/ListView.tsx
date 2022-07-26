@@ -24,13 +24,10 @@ export const ListView = <
     getCharacterSheetData()[props.index] as T
   );
   registerComponent(props.index, (x: T) => {
-    console.debug(props.index, x, val, x !== val);
-
     dispatch(x);
   });
 
   if (Array.isArray(val)) {
-    console.debug("ListView render", val);
     return (
       <ul>
         {val.map((_, i) => {
