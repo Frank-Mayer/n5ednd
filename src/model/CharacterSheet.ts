@@ -228,6 +228,10 @@ export class CharacterSheetModel {
   public flaws: string;
   //#endregion
 
+  //#region page 1 section 6
+  public featuresTraitsProficiencies: Array<string>;
+  //#endregion
+
   //#region page 1 section 8
   public ryo: number;
   public equipment: Array<Equipment>;
@@ -315,5 +319,6 @@ export class CharacterSheetModel {
     this.ideals = data.ideals ?? "";
     this.bonds = data.bonds ?? "";
     this.flaws = data.flaws ?? "";
+    this.featuresTraitsProficiencies = data.featuresTraitsProficiencies ?? [];
   }
 }

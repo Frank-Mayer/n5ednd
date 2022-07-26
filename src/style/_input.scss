@@ -160,3 +160,43 @@
     text-align: center;
   }
 }
+
+.ListView {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  overflow-y: auto;
+
+  > li {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 0.5em;
+
+    &:not(.add):hover {
+      background-color: rgba(color.$foreground, 0.1);
+      > button.remove {
+        background-color: red;
+      }
+    }
+
+    &.add {
+      padding: 2px 0.5em;
+      justify-content: flex-end;
+      cursor: pointer;
+
+      &:hover {
+        background-color: rgba(yellowgreen, 0.1);
+      }
+    }
+
+    > button.remove {
+      padding: 0 0.45em;
+      cursor: pointer;
+      border-radius: 25%;
+      background-color: rgba(color.$background, 0.1);
+    }
+  }
+}

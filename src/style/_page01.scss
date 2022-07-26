@@ -87,8 +87,7 @@ $gap: 8px;
       border-spacing: 0.2rem 1rem;
       > tbody > tr {
         > td {
-          > ul,
-          > ol {
+          > .ListView {
             grid-area: 1 / 2 / 2 / 3;
             > li,
             > li > * {
@@ -151,6 +150,26 @@ $gap: 8px;
 
   > .s07 {
     grid-area: 3 / 3 / 5 / 4;
+
+    display: grid;
+    gap: 1rem;
+    grid-template-rows: 1fr auto;
+
+    > .ListView {
+      border: {
+        width: 1px;
+        style: solid;
+        color: rgba(color.$foreground, 0.5);
+        radius: 1rem;
+      }
+      padding: 0.5em;
+    }
+
+    > label {
+      color: rgba(color.$foreground, 0.5);
+      width: 100%;
+      text-align: center;
+    }
   }
 
   > .s08 {

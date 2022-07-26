@@ -342,8 +342,8 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView style="big" index="speed" />
         <PrimitiveView style="big" index="hitPointsMax" />
         <PrimitiveView style="big" index="chakraPointsMax" />
-        <PrimitiveView style="big" index="hitPointsCurrent" />
-        <PrimitiveView style="big" index="chakraPointsCurrent" />
+        <PrimitiveView style="big" index="hitPointsCurrent" readonly />
+        <PrimitiveView style="big" index="chakraPointsCurrent" readonly />
         <PrimitiveView style="big" index="hitDie" />
         <PrimitiveView style="big" index="chakraDie" />
       </section>
@@ -354,7 +354,30 @@ ReactDOM.createRoot(rootEl!).render(
         <TextView index="flaws" />
       </section>
       <section className="s06">{/* attacks & jutsus */}</section>
-      <section className="s07">{/* features, tatins, proficiencies */}</section>
+      <section className="s07">
+        <ListView
+          index="featuresTraitsProficiencies"
+          add={(arr) => {
+            const newItem = prompt("Add Feature/Trait/Proficiency");
+            if (newItem) {
+              arr.push(newItem);
+            }
+          }}
+        >
+          {({ item, key, setValue }) => (
+            <input
+              key={key}
+              type="text"
+              value={item}
+              onChange={(ev) => {
+                setValue(ev.target.value);
+                notifyPropertyChanged();
+              }}
+            />
+          )}
+        </ListView>
+        <label>Features &amp; Traits &amp; Proficiencies</label>
+      </section>
       <section className="s08">{/* equipment */}</section>
     </div>
   </>
