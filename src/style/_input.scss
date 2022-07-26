@@ -161,7 +161,8 @@
   }
 }
 
-.ListView {
+ul.ListView,
+ol.ListView {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
@@ -197,6 +198,33 @@
       cursor: pointer;
       border-radius: 25%;
       background-color: rgba(color.$background, 0.1);
+    }
+  }
+}
+
+table.ListView {
+  tbody > tr:not(.header) {
+    &:hover {
+      background-color: rgba(color.$foreground, 0.1);
+      > td > button.remove {
+        background-color: red;
+      }
+    }
+
+    td > button.remove {
+      padding: 0 0.45em;
+      cursor: pointer;
+      border-radius: 25%;
+      background-color: rgba(color.$background, 0.1);
+    }
+  }
+
+  tfoot > tr.add {
+    cursor: pointer;
+    width: max-content;
+
+    &:hover {
+      background-color: rgba(yellowgreen, 0.1);
     }
   }
 }

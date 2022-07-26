@@ -13,6 +13,7 @@ interface Props<
   T extends CharacterSheetModel[K] & Array<ArrayElType<CharacterSheetModel[K]>>
 > {
   index: K;
+  thead?: Array<string>;
   children: (x: {
     item: ArrayElType<T>;
     key: string;
@@ -35,7 +36,67 @@ export const ListView = <
   });
 
   if (Array.isArray(val)) {
-    return (
+    return props.thead ? (
+      <table className="ListView">
+        <tbody>
+          <tr className="header">
+            {props.add ? <th></th> : null}
+            {props.thead.map((x) => (
+              <th key={`${props.index}.head.${x}`}>{x}</th>
+            ))}
+          </tr>
+          {val.map((_, i) => {
+            const key = `${props.index}[${i}]`;
+            const item = (getCharacterSheetData()[props.index] as T)[i];
+
+            return (
+              <tr key={key}>
+                {props.add ? (
+                  <td>
+                    <button
+                      key={key + ".__remove__"}
+                      className="remove"
+                      title="Remove this item from the list"
+                      onClick={() => {
+                        (getCharacterSheetData()[props.index] as T).splice(
+                          i,
+                          1
+                        );
+                        notifyPropertyChanged();
+                      }}
+                    >
+                      x
+                    </button>
+                  </td>
+                ) : null}
+                {props.children({
+                  item,
+                  key,
+                  setValue: (x: ArrayElType<T>) => {
+                    (getCharacterSheetData()[props.index] as T)[i] = x;
+                  },
+                })}
+              </tr>
+            );
+          })}
+        </tbody>
+        <tfoot>
+          {props.add ? (
+            <tr
+              className="add"
+              title="Add new item to the list"
+              key={`${props.index}}.__add__`}
+              onClick={() => {
+                props.add!(getCharacterSheetData()[props.index] as T);
+                notifyPropertyChanged();
+              }}
+            >
+              <td>Add item</td>
+            </tr>
+          ) : null}
+        </tfoot>
+      </table>
+    ) : (
       <ul className="ListView">
         {val.map((_, i) => {
           const key = `${props.index}[${i}]`;
@@ -54,9 +115,7 @@ export const ListView = <
                 >
                   x
                 </button>
-              ) : (
-                <></>
-              )}
+              ) : null}
               {props.children({
                 item,
                 key,
@@ -78,9 +137,7 @@ export const ListView = <
           >
             Add item
           </li>
-        ) : (
-          <></>
-        )}
+        ) : null}
       </ul>
     );
   } else {

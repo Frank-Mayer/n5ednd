@@ -9,6 +9,7 @@ import { Upload } from "./save";
 import { ListView } from "./view/ListView";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import { TextView } from "./view/TextView";
+import { Equipment } from "./model/Equipment";
 
 const rootEl = document.getElementById("root");
 
@@ -378,7 +379,58 @@ ReactDOM.createRoot(rootEl!).render(
         </ListView>
         <label>Features &amp; Traits &amp; Proficiencies</label>
       </section>
-      <section className="s08">{/* equipment */}</section>
+      <section className="s08">
+        <PrimitiveView index="ryo" style="left" />
+        <ListView
+          index="equipment"
+          thead={["Name", "Armor", "Bulk"]}
+          add={(arr) => {
+            const newItem = prompt("New Equipment name");
+            if (newItem) {
+              arr.push(new Equipment({ name: newItem }));
+            }
+          }}
+        >
+          {({ item, key }) => (
+            <>
+              <td>
+                <input
+                  key={key + ".name"}
+                  value={item.name}
+                  onChange={(ev) => {
+                    item.name = ev.target.value;
+                    notifyPropertyChanged();
+                  }}
+                />
+              </td>
+              <td>
+                <input
+                  key={key + ".armor"}
+                  type="number"
+                  min="0"
+                  value={item.armor}
+                  onChange={(ev) => {
+                    item.armor = Number.parseInt(ev.target.value);
+                    notifyPropertyChanged();
+                  }}
+                />
+              </td>
+              <td>
+                <input
+                  key={key + ".bulk"}
+                  type="number"
+                  min="0"
+                  value={item.bulk}
+                  onChange={(ev) => {
+                    item.bulk = Number.parseInt(ev.target.value);
+                    notifyPropertyChanged();
+                  }}
+                />
+              </td>
+            </>
+          )}
+        </ListView>
+      </section>
     </div>
   </>
 );

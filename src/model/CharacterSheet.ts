@@ -303,7 +303,9 @@ export class CharacterSheetModel {
     ];
 
     this.ryo = data.ryo ?? 100;
-    this.equipment = data.equipment ?? new Array();
+    this.equipment = data.equipment
+      ? data.equipment.map((x) => new Equipment(x))
+      : new Array();
 
     this.armorClass = data.armorClass ?? 0;
     this.initiative = data.initiative ?? 0;
