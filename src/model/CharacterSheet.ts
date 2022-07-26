@@ -209,6 +209,18 @@ export class CharacterSheetModel {
   }
   //#endregion
 
+  //#region page 1 section 4
+  public armorClass: number;
+  public initiative: number;
+  public speed: number;
+  public hitPointsMax: number;
+  public hitPointsCurrent: number;
+  public chakraPointsMax: number;
+  public chakraPointsCurrent: number;
+  public hitDie: number;
+  public chakraDie: number;
+  //#endregion
+
   //#region page 1 section 8
   public ryo: number;
   public equipment: Array<Equipment>;
@@ -281,5 +293,15 @@ export class CharacterSheetModel {
 
     this.ryo = data.ryo ?? 100;
     this.equipment = data.equipment ?? new Array();
+
+    this.armorClass = data.armorClass ?? 0;
+    this.initiative = data.initiative ?? 0;
+    this.speed = data.speed ?? 30;
+    this.hitPointsMax = data.hitPointsMax ?? 0;
+    this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
+    this.chakraPointsMax = data.chakraPointsMax ?? 0;
+    this.chakraPointsCurrent = data.chakraPointsCurrent ?? 0;
+    this.hitDie = data.hitDie ?? 0;
+    this.chakraDie = data.chakraDie ?? 0;
   }
 }

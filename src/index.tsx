@@ -324,7 +324,17 @@ ReactDOM.createRoot(rootEl!).render(
           </tbody>
         </table>
       </section>
-      <section className="s04">{/* armor, initiative, speed, ... */}</section>
+      <section className="s04">
+        <PrimitiveView index="armorClass" readonly />
+        <PrimitiveView index="initiative" />
+        <PrimitiveView index="speed" />
+        <PrimitiveView index="hitPointsMax" />
+        <PrimitiveView index="chakraPointsMax" />
+        <PrimitiveView index="hitPointsCurrent" />
+        <PrimitiveView index="chakraPointsCurrent" />
+        <PrimitiveView index="hitDie" />
+        <PrimitiveView index="chakraDie" />
+      </section>
       <section className="s05">{/* personality, ideals, ... */}</section>
       <section className="s06">{/* attacks & jutsus */}</section>
       <section className="s07">{/* features, tatins, proficiencies */}</section>
