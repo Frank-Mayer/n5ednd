@@ -221,6 +221,13 @@ export class CharacterSheetModel {
   public chakraDie: number;
   //#endregion
 
+  //#region page 1 section 5
+  public personalityTraits: string;
+  public ideals: string;
+  public bonds: string;
+  public flaws: string;
+  //#endregion
+
   //#region page 1 section 8
   public ryo: number;
   public equipment: Array<Equipment>;
@@ -303,5 +310,10 @@ export class CharacterSheetModel {
     this.chakraPointsCurrent = data.chakraPointsCurrent ?? 0;
     this.hitDie = data.hitDie ?? 0;
     this.chakraDie = data.chakraDie ?? 0;
+
+    this.personalityTraits = data.personalityTraits ?? "";
+    this.ideals = data.ideals ?? "";
+    this.bonds = data.bonds ?? "";
+    this.flaws = data.flaws ?? "";
   }
 }

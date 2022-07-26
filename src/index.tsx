@@ -9,6 +9,7 @@ import "./view/page01.scss";
 import { Upload } from "./save";
 import { ListView } from "./view/ListView";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
+import { TextView } from "./view/TextView";
 
 const rootEl = document.getElementById("root");
 
@@ -335,7 +336,12 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView index="hitDie" />
         <PrimitiveView index="chakraDie" />
       </section>
-      <section className="s05">{/* personality, ideals, ... */}</section>
+      <section className="s05">
+        <TextView index="personalityTraits" />
+        <TextView index="ideals" />
+        <TextView index="bonds" />
+        <TextView index="flaws" />
+      </section>
       <section className="s06">{/* attacks & jutsus */}</section>
       <section className="s07">{/* features, tatins, proficiencies */}</section>
       <section className="s08">{/* equipment */}</section>

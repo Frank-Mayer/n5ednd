@@ -54,7 +54,7 @@ export const PrimitiveView = <
   });
 
   return (
-    <label>
+    <label className="PrimitiveView">
       <span>{props.label ?? camelToHuman(props.index)}</span>
       <input
         key={props.index}

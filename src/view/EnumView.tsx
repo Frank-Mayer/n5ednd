@@ -28,7 +28,7 @@ export const EnumView = <
   });
 
   return (
-    <label>
+    <label className="EnumView">
       <span>{props.label ?? camelToHuman(props.index)}</span>
       <select
         key={props.index}
