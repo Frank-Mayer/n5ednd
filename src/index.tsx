@@ -5,7 +5,6 @@ import { EnumView } from "./view/EnumView";
 import { EBackground } from "./model/Backgrounds/EBackground";
 import { EClass } from "./model/Classes/EClass";
 import { EClan } from "./model/Clans/EClan";
-import "./view/page01.scss";
 import { Upload } from "./save";
 import { ListView } from "./view/ListView";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
@@ -22,28 +21,28 @@ ReactDOM.createRoot(rootEl!).render(
     <Upload />
     <div className="p01">
       <section className="s01">
-        <PrimitiveView index="proficiencyBonus" readonly />
-        <PrimitiveView index="passivePerception" readonly />
-        <PrimitiveView index="passiveInsight" readonly />
-        <PrimitiveView index="willOfFire" readonly />
+        <PrimitiveView style="left" index="proficiencyBonus" readonly />
+        <PrimitiveView style="left" index="passivePerception" readonly />
+        <PrimitiveView style="right" index="passiveInsight" readonly />
+        <PrimitiveView style="left" index="willOfFire" readonly />
       </section>
       <section className="s02">
-        <PrimitiveView index="name" label="Character Name" />
-        <EnumView enum={EClan} index="clan" />
-        <PrimitiveView index="playerName" />
-        <EnumView enum={EClass} index="class" />
-        <PrimitiveView index="level" />
-        <EnumView enum={EBackground} index="background" />
-        <PrimitiveView index="rank" />
-        <PrimitiveView index="xp" />
+        <PrimitiveView style="underline" index="name" label="Character Name" />
+        <EnumView style="underline" enum={EClan} index="clan" />
+        <PrimitiveView style="underline" index="playerName" />
+        <EnumView style="underline" enum={EClass} index="class" />
+        <PrimitiveView style="underline" index="level" />
+        <EnumView style="underline" enum={EBackground} index="background" />
+        <PrimitiveView style="underline" index="rank" />
+        <PrimitiveView style="underline" index="xp" />
       </section>
       <section className="s03">
         <table>
           <tbody>
             <tr>
               <th>
-                <PrimitiveView index="strength" />
-                <PrimitiveView index="strengthDice" readonly />
+                <PrimitiveView style="big" index="strength" />
+                <PrimitiveView style="no-label" index="strengthDice" readonly />
               </th>
               <td>
                 <ListView index="strengthProficiencies">
@@ -89,8 +88,12 @@ ReactDOM.createRoot(rootEl!).render(
             </tr>
             <tr>
               <th>
-                <PrimitiveView index="dexterity" />
-                <PrimitiveView index="dexterityDice" readonly />
+                <PrimitiveView style="big" index="dexterity" />
+                <PrimitiveView
+                  style="no-label"
+                  index="dexterityDice"
+                  readonly
+                />
               </th>
               <td>
                 <ListView index="dexterityProficiencies">
@@ -136,8 +139,12 @@ ReactDOM.createRoot(rootEl!).render(
             </tr>
             <tr>
               <th>
-                <PrimitiveView index="constitution" />
-                <PrimitiveView index="constitutionDice" readonly />
+                <PrimitiveView style="big" index="constitution" />
+                <PrimitiveView
+                  style="no-label"
+                  index="constitutionDice"
+                  readonly
+                />
               </th>
               <td>
                 <ListView index="constitutionProficiencies">
@@ -183,8 +190,12 @@ ReactDOM.createRoot(rootEl!).render(
             </tr>
             <tr>
               <th>
-                <PrimitiveView index="intelligence" />
-                <PrimitiveView index="intelligenceDice" readonly />
+                <PrimitiveView style="big" index="intelligence" />
+                <PrimitiveView
+                  style="no-label"
+                  index="intelligenceDice"
+                  readonly
+                />
               </th>
               <td>
                 <ListView index="intelligenceProficiencies">
@@ -230,8 +241,8 @@ ReactDOM.createRoot(rootEl!).render(
             </tr>
             <tr>
               <th>
-                <PrimitiveView index="wisdom" />
-                <PrimitiveView index="wisdomDice" readonly />
+                <PrimitiveView style="big" index="wisdom" />
+                <PrimitiveView style="no-label" index="wisdomDice" readonly />
               </th>
               <td>
                 <ListView index="wisdomProficiencies">
@@ -277,8 +288,8 @@ ReactDOM.createRoot(rootEl!).render(
             </tr>
             <tr>
               <th>
-                <PrimitiveView index="charisma" />
-                <PrimitiveView index="charismaDice" readonly />
+                <PrimitiveView style="big" index="charisma" />
+                <PrimitiveView style="no-label" index="charismaDice" readonly />
               </th>
               <td>
                 <ListView index="charismaProficiencies">
@@ -326,15 +337,15 @@ ReactDOM.createRoot(rootEl!).render(
         </table>
       </section>
       <section className="s04">
-        <PrimitiveView index="armorClass" readonly />
-        <PrimitiveView index="initiative" />
-        <PrimitiveView index="speed" />
-        <PrimitiveView index="hitPointsMax" />
-        <PrimitiveView index="chakraPointsMax" />
-        <PrimitiveView index="hitPointsCurrent" />
-        <PrimitiveView index="chakraPointsCurrent" />
-        <PrimitiveView index="hitDie" />
-        <PrimitiveView index="chakraDie" />
+        <PrimitiveView style="big" index="armorClass" readonly />
+        <PrimitiveView style="big" index="initiative" />
+        <PrimitiveView style="big" index="speed" />
+        <PrimitiveView style="big" index="hitPointsMax" />
+        <PrimitiveView style="big" index="chakraPointsMax" />
+        <PrimitiveView style="big" index="hitPointsCurrent" />
+        <PrimitiveView style="big" index="chakraPointsCurrent" />
+        <PrimitiveView style="big" index="hitDie" />
+        <PrimitiveView style="big" index="chakraDie" />
       </section>
       <section className="s05">
         <TextView index="personalityTraits" />

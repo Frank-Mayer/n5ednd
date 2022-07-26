@@ -1,0 +1,162 @@
+@use "color";
+
+.PrimitiveView.underline,
+.EnumView.underline {
+  border: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto auto;
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas:
+    "input"
+    "label";
+
+  > * {
+    width: 100%;
+  }
+
+  > input,
+  > select {
+    grid-area: input;
+    height: 2rem;
+    border-bottom: 1px solid rgba(color.$foreground, 0.5);
+  }
+
+  > span {
+    height: auto;
+    border: none;
+    grid-area: label;
+    color: rgba(color.$foreground, 0.5);
+  }
+}
+
+.PrimitiveView.left,
+.EnumView.left {
+  border: none;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-end;
+  gap: 0.5vmin;
+  flex-direction: row-reverse;
+
+  > input,
+  > select {
+    width: 4rem;
+    text-align: center;
+  }
+
+  > span {
+    width: calc(100% - 4rem);
+    height: fit-content;
+    text-align: left;
+  }
+}
+
+.PrimitiveView.right,
+.EnumView.right {
+  border: none;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 0.5vmin;
+  flex-direction: row;
+
+  > input,
+  > select {
+    width: 4rem;
+    text-align: center;
+  }
+
+  > span {
+    width: calc(100% - 4rem);
+    height: fit-content;
+    text-align: left;
+  }
+}
+
+.PrimitiveView.big,
+.EnumView.big {
+  border: none;
+  height: 5rem;
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: center;
+  gap: 0.5vmin;
+  flex-direction: column;
+
+  > input,
+  > select {
+    font-size: 2.25em;
+    text-align: center;
+  }
+
+  > input[type="number"] {
+    width: 4em;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+      margin: 0;
+    }
+    -moz-appearance: textfield;
+  }
+
+  > span {
+    width: fit-content;
+    height: 5em;
+    text-align: center;
+  }
+}
+
+.PrimitiveView.no-label,
+.EnumView.no-label {
+  width: 5em;
+  margin: 0 auto;
+
+  > span {
+    display: none;
+    visibility: collapse;
+  }
+
+  > input {
+    text-align: center;
+    width: 5em;
+  }
+}
+
+.TextView {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 1fr auto;
+  grid-column-gap: 0;
+  grid-row-gap: 0;
+  grid-template-areas:
+    "input"
+    "label";
+
+  > textarea {
+    grid-area: input;
+    background-color: transparent;
+    border: {
+      width: 1px;
+      style: solid;
+      color: rgba(color.$foreground, 0.5);
+      radius: 1rem;
+    }
+    padding: 0.5em;
+    width: 100%;
+    resize: none;
+  }
+
+  > span {
+    grid-area: label;
+    color: rgba(color.$foreground, 0.5);
+    text-align: center;
+  }
+}

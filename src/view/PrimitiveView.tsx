@@ -11,6 +11,7 @@ interface Props<K extends keyof CharacterSheetModel> {
   index: K;
   readonly?: boolean;
   label?: string;
+  style: "left" | "right" | "underline" | "big" | "no-label";
 }
 
 export const typeMap = {
@@ -54,7 +55,7 @@ export const PrimitiveView = <
   });
 
   return (
-    <label className="PrimitiveView">
+    <label className={"PrimitiveView " + props.style}>
       <span>{props.label ?? camelToHuman(props.index)}</span>
       <input
         key={props.index}

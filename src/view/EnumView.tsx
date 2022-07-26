@@ -11,6 +11,7 @@ interface Props<K extends keyof CharacterSheetModel> {
   index: K;
   enum: any;
   label?: string;
+  style: "left" | "right" | "underline" | "big" | "no-label";
 }
 
 export const EnumView = <
@@ -28,7 +29,7 @@ export const EnumView = <
   });
 
   return (
-    <label className="EnumView">
+    <label className={"EnumView " + props.style}>
       <span>{props.label ?? camelToHuman(props.index)}</span>
       <select
         key={props.index}
