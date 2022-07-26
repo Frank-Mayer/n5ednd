@@ -28,6 +28,10 @@ export const defaultProficiencyBonus = (level: number): number => {
     case 20:
       return 9;
     default:
-      return 0;
+      if (level > 20) {
+        return 10;
+      } else {
+        return 0;
+      }
   }
 };

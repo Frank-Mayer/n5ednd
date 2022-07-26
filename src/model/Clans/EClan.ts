@@ -3,6 +3,7 @@ export enum EClan {
   "Akimichi",
   "Bakuton",
   "Fuma",
+  "Futton",
   "Hatake",
   "Hebi",
   "Hoshigaki",

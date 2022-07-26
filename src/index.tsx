@@ -340,7 +340,7 @@ ReactDOM.createRoot(rootEl!).render(
       <section className="s04">
         <PrimitiveView style="big" index="armorClass" readonly />
         <PrimitiveView style="big" index="initiative" />
-        <PrimitiveView style="big" index="speed" />
+        <PrimitiveView style="big" index="speed" readonly />
         <PrimitiveView style="big" index="hitPointsMax" />
         <PrimitiveView style="big" index="chakraPointsMax" />
         <PrimitiveView style="big" index="hitPointsCurrent" readonly />

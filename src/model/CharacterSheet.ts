@@ -1,9 +1,12 @@
 import { EBackground } from "./Backgrounds/EBackground";
 import { EClan } from "./Clans/EClan";
+import { IClan } from "./Clans/IClan";
 import { EClass } from "./Classes/EClass";
 import type { IClass } from "./Classes/IClass";
 import * as Classes from "./Classes/index";
+import * as Clans from "./Clans/index";
 import { Equipment } from "./Equipment";
+import { Proficiency } from "./Proficiency";
 
 const importEnum = (e: any, value: string | number | undefined, def: any) => {
   if (value === undefined) {
@@ -15,15 +18,7 @@ const importEnum = (e: any, value: string | number | undefined, def: any) => {
   }
 };
 
-type Proficiencies = {
-  label: string;
-  value: number;
-  p: boolean;
-  h: boolean;
-  e: boolean;
-};
-
-const emptyProficiency = (label: string = "Saving Throw"): Proficiencies => ({
+const emptyProficiency = (label: string = "Saving Throw"): Proficiency => ({
   label,
   value: 0,
   p: false,
@@ -33,6 +28,7 @@ const emptyProficiency = (label: string = "Saving Throw"): Proficiencies => ({
 
 export class CharacterSheetModel {
   private readonly characterClass: IClass;
+  private readonly characterClan: IClan;
 
   //#region page 1 section 1
   public get proficiencyBonus() {
@@ -61,8 +57,8 @@ export class CharacterSheetModel {
   public get strengthDice(): number {
     return Math.floor((this.strength - 10) / 2);
   }
-  public _strengthProficiencies: Array<Proficiencies>;
-  public set strengthProficiencies(value: Array<Proficiencies>) {
+  public _strengthProficiencies: Array<Proficiency>;
+  public set strengthProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.strengthDice;
@@ -86,7 +82,7 @@ export class CharacterSheetModel {
   public get dexterityDice(): number {
     return Math.floor((this.dexterity - 10) / 2);
   }
-  public _dexterityProficiencies: Array<Proficiencies>;
+  public _dexterityProficiencies: Array<Proficiency>;
   public get dexterityProficiencies() {
     for (const item of this._dexterityProficiencies) {
       if (item.p) {
@@ -97,7 +93,7 @@ export class CharacterSheetModel {
     }
     return this._dexterityProficiencies;
   }
-  public set dexterityProficiencies(value: Array<Proficiencies>) {
+  public set dexterityProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.dexterityDice;
@@ -111,7 +107,7 @@ export class CharacterSheetModel {
   public get constitutionDice(): number {
     return Math.floor((this.constitution - 10) / 2);
   }
-  public _constitutionProficiencies: Array<Proficiencies>;
+  public _constitutionProficiencies: Array<Proficiency>;
   public get constitutionProficiencies() {
     for (const item of this._constitutionProficiencies) {
       if (item.p) {
@@ -122,7 +118,7 @@ export class CharacterSheetModel {
     }
     return this._constitutionProficiencies;
   }
-  public set constitutionProficiencies(value: Array<Proficiencies>) {
+  public set constitutionProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.constitutionDice;
@@ -136,7 +132,7 @@ export class CharacterSheetModel {
   public get intelligenceDice(): number {
     return Math.floor((this.intelligence - 10) / 2);
   }
-  public _intelligenceProficiencies: Array<Proficiencies>;
+  public _intelligenceProficiencies: Array<Proficiency>;
   public get intelligenceProficiencies() {
     for (const item of this._intelligenceProficiencies) {
       if (item.p) {
@@ -147,7 +143,7 @@ export class CharacterSheetModel {
     }
     return this._intelligenceProficiencies;
   }
-  public set intelligenceProficiencies(value: Array<Proficiencies>) {
+  public set intelligenceProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.intelligenceDice;
@@ -161,7 +157,7 @@ export class CharacterSheetModel {
   public get wisdomDice(): number {
     return Math.floor((this.wisdom - 10) / 2);
   }
-  public _wisdomProficiencies: Array<Proficiencies>;
+  public _wisdomProficiencies: Array<Proficiency>;
   public get wisdomProficiencies() {
     for (const item of this._wisdomProficiencies) {
       if (item.p) {
@@ -172,7 +168,7 @@ export class CharacterSheetModel {
     }
     return this._wisdomProficiencies;
   }
-  public set wisdomProficiencies(value: Array<Proficiencies>) {
+  public set wisdomProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.wisdomDice;
@@ -186,7 +182,7 @@ export class CharacterSheetModel {
   public get charismaDice(): number {
     return Math.floor((this.charisma - 10) / 2);
   }
-  public _charismaProficiencies: Array<Proficiencies>;
+  public _charismaProficiencies: Array<Proficiency>;
   public get charismaProficiencies() {
     for (const item of this._charismaProficiencies) {
       if (item.p) {
@@ -197,7 +193,7 @@ export class CharacterSheetModel {
     }
     return this._charismaProficiencies;
   }
-  public set charismaProficiencies(value: Array<Proficiencies>) {
+  public set charismaProficiencies(value: Array<Proficiency>) {
     for (const item of value) {
       if (item.p) {
         item.value = this.proficiencyBonus + this.charismaDice;
@@ -212,7 +208,9 @@ export class CharacterSheetModel {
   //#region page 1 section 4
   public armorClass: number;
   public initiative: number;
-  public speed: number;
+  public get speed(): number {
+    return this.characterClan.speed;
+  }
   public hitPointsMax: number;
   public hitPointsCurrent: number;
   public chakraPointsMax: number;
@@ -255,52 +253,62 @@ export class CharacterSheetModel {
     this.rank = data.rank ?? 1;
     this.xp = data.xp ?? 0;
     this.characterClass = new (Classes.from(this.class))();
+    this.characterClan = new (Clans.from(this.clan))();
 
     this.strength = data.strength ?? 10;
-    this._strengthProficiencies = data._strengthProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Athletics"),
-      emptyProficiency("Martal Arts"),
-    ];
+    this._strengthProficiencies = data._strengthProficiencies
+      ? data._strengthProficiencies.map((x) => new Proficiency(x))
+      : [
+          emptyProficiency(),
+          emptyProficiency("Athletics"),
+          emptyProficiency("Martal Arts"),
+        ];
     this.dexterity = data.dexterity ?? 10;
-    this._dexterityProficiencies = data._dexterityProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Acrobatics"),
-      emptyProficiency("Sleight of Hand"),
-      emptyProficiency("Stealth"),
-    ];
+    this._dexterityProficiencies = data._dexterityProficiencies
+      ? data._dexterityProficiencies.map((x) => new Proficiency(x))
+      : [
+          emptyProficiency(),
+          emptyProficiency("Acrobatics"),
+          emptyProficiency("Sleight of Hand"),
+          emptyProficiency("Stealth"),
+        ];
     this.constitution = data.constitution ?? 10;
-    this._constitutionProficiencies = data._constitutionProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Chakra Control"),
-    ];
+    this._constitutionProficiencies = data._constitutionProficiencies
+      ? data._constitutionProficiencies.map((x) => new Proficiency(x))
+      : [emptyProficiency(), emptyProficiency("Chakra Control")];
     this.intelligence = data.intelligence ?? 10;
-    this._intelligenceProficiencies = data._intelligenceProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Crafting"),
-      emptyProficiency("History"),
-      emptyProficiency("Investigation"),
-      emptyProficiency("Nature"),
-      emptyProficiency("Ninshou"),
-    ];
+    this._intelligenceProficiencies = data._intelligenceProficiencies
+      ? data._intelligenceProficiencies.map((x) => new Proficiency(x))
+      : [
+          emptyProficiency(),
+          emptyProficiency("Crafting"),
+          emptyProficiency("History"),
+          emptyProficiency("Investigation"),
+          emptyProficiency("Nature"),
+          emptyProficiency("Ninshou"),
+        ];
     this.wisdom = data.wisdom ?? 10;
-    this._wisdomProficiencies = data._wisdomProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Animal Handling"),
-      emptyProficiency("Illusion"),
-      emptyProficiency("Insight"),
-      emptyProficiency("Medicine"),
-      emptyProficiency("Perception"),
-      emptyProficiency("Survival"),
-    ];
+    this._wisdomProficiencies = data._wisdomProficiencies
+      ? data._wisdomProficiencies.map((x) => new Proficiency(x))
+      : [
+          emptyProficiency(),
+          emptyProficiency("Animal Handling"),
+          emptyProficiency("Illusion"),
+          emptyProficiency("Insight"),
+          emptyProficiency("Medicine"),
+          emptyProficiency("Perception"),
+          emptyProficiency("Survival"),
+        ];
     this.charisma = data.charisma ?? 10;
-    this._charismaProficiencies = data._charismaProficiencies ?? [
-      emptyProficiency(),
-      emptyProficiency("Deception"),
-      emptyProficiency("Intimidation"),
-      emptyProficiency("Performance"),
-      emptyProficiency("Persuasion"),
-    ];
+    this._charismaProficiencies = data._charismaProficiencies
+      ? data._charismaProficiencies.map((x) => new Proficiency(x))
+      : [
+          emptyProficiency(),
+          emptyProficiency("Deception"),
+          emptyProficiency("Intimidation"),
+          emptyProficiency("Performance"),
+          emptyProficiency("Persuasion"),
+        ];
 
     this.ryo = data.ryo ?? 100;
     this.equipment = data.equipment
@@ -309,7 +317,6 @@ export class CharacterSheetModel {
 
     this.armorClass = data.armorClass ?? 0;
     this.initiative = data.initiative ?? 0;
-    this.speed = data.speed ?? 30;
     this.hitPointsMax = data.hitPointsMax ?? 0;
     this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
     this.chakraPointsMax = data.chakraPointsMax ?? 0;
