@@ -1,3 +1,4 @@
+@use "additionalStyles";
 @use "color";
 
 .PrimitiveView.underline,
@@ -82,23 +83,24 @@
 .PrimitiveView.big,
 .EnumView.big {
   border: none;
-  height: 5rem;
+  height: 5em;
   width: fit-content;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
   justify-content: center;
-  gap: 0.5vmin;
+  gap: 0.25vmin;
   flex-direction: column;
 
   > input,
   > select {
     font-size: 2.25em;
+    width: 100%;
     text-align: center;
   }
 
   > input[type="number"] {
-    width: 4em;
+    width: 3em;
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button {
       -webkit-appearance: none;
@@ -109,7 +111,7 @@
 
   > span {
     width: fit-content;
-    height: 5em;
+    height: 1.25em;
     text-align: center;
   }
 }
@@ -143,12 +145,7 @@
   > textarea {
     grid-area: input;
     background-color: transparent;
-    border: {
-      width: 1px;
-      style: solid;
-      color: rgba(color.$foreground, 0.5);
-      radius: 1rem;
-    }
+    @include additionalStyles.border;
     padding: 0.5em;
     width: 100%;
     resize: none;

@@ -1,0 +1,11 @@
+@use "color";
+
+@mixin border {
+  border: {
+    width: 1px;
+    style: solid;
+    color: rgba(color.$foreground, 0.5);
+    radius: 1rem;
+  }
+  padding: 0.5em;
+}
