@@ -47,8 +47,21 @@ input {
   }
 }
 
+:root {
+  cursor: default;
+}
+
 input:not([type="checkbox"]):read-only {
-  cursor: not-allowed;
+  cursor: not-allowed !important;
+}
+
+textarea:read-write,
+input:read-write {
+  cursor: text !important;
+}
+
+select {
+  cursor: pointer !important;
 }
 
 div#root {
