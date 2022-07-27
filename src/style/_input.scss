@@ -83,7 +83,7 @@
 .PrimitiveView.big,
 .EnumView.big {
   border: none;
-  height: 5em;
+  height: calc(var(--font-size-big) + var(--font-size-regular) * 1.5);
   width: fit-content;
   display: flex;
   align-items: center;
@@ -110,8 +110,8 @@
   }
 
   > span {
-    width: fit-content;
-    height: 1.25em;
+    font-size: var(--font-size-small);
+    height: fit-content;
     text-align: center;
   }
 }

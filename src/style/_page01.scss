@@ -128,7 +128,8 @@ $gap: 8px;
       @include additionalStyles.border;
 
       &.PrimitiveView.big {
-        height: 6.2em;
+        height: calc(var(--font-size-big) * 2 + var(--font-size-regular) * 2);
+
         > input {
           width: 2em !important;
         }
@@ -176,11 +177,11 @@ $gap: 8px;
       }
       &:nth-child(8) {
         grid-area: 4 / 1 / 5 / 4;
-        width: calc(100% - 0.5em) !important;
+        width: 100% !important;
       }
       &:nth-child(9) {
         grid-area: 4 / 4 / 5 / 7;
-        width: calc(100% - 0.5em) !important;
+        width: 100% !important;
       }
     }
   }
