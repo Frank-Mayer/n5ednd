@@ -119,7 +119,6 @@ dist
 # Visual Studio
 .vs
 .vscode-test
-.vscode
 
 # yarn v2
 .yarn
