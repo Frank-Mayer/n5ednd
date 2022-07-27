@@ -4,6 +4,7 @@ import {
   getCharacterSheetData,
   setCharacterSheetData,
 } from "./data/CharacterSheetData";
+import { getStatisticsData, setStatisticsData } from "./data/StatisticsData";
 import { EClan } from "./model/Clans/EClan";
 import { EClass } from "./model/Classes/EClass";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
@@ -12,7 +13,10 @@ import { openDB } from "idb";
 import { CharacterSheetModel } from "./model/CharacterSheet";
 
 const save = () => {
-  const data = getCharacterSheetData();
+  const data = {
+    characterSheet: getCharacterSheetData(),
+    statistics: getStatisticsData(),
+  };
   const json = JSON.stringify(data);
   const compr = lzwCompress
     .pack(json)
@@ -22,9 +26,12 @@ const save = () => {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = `${data.name} ${EClan[data.clan]} ${EClass[data.class]} Lv${
-    data.level
-  }.lzw`;
+  a.download = [
+    data.characterSheet.name,
+    EClan[data.characterSheet.clan],
+    EClass[data.characterSheet.class],
+    `Lv${data.characterSheet.level}.lzw`,
+  ].join(" ");
   a.click();
   URL.revokeObjectURL(url);
   a.remove();
@@ -38,7 +45,12 @@ const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
       const data = JSON.parse(
         lzwCompress.unpack(text.split("").map((x) => x.charCodeAt(0)))
       );
-      setCharacterSheetData(data);
+      if (data.characterSheet) {
+        setCharacterSheetData(data.characterSheet);
+      }
+      if (data.statistics) {
+        setStatisticsData(data.statistics);
+      }
     })
     .catch((err) => {
       alert(err);
@@ -72,6 +84,8 @@ window.addEventListener(
 );
 
 const characterSheetObjectStore = "character-sheet";
+const characterSheetKey = "character-sheet";
+const statisticsKey = "statistics";
 
 export const dbProm = openDB<CharacterSheetModel>("naruto", 1, {
   upgrade(db) {
@@ -82,7 +96,7 @@ export const dbProm = openDB<CharacterSheetModel>("naruto", 1, {
 });
 
 dbProm.then((db) => {
-  db.get(characterSheetObjectStore, 1)
+  db.get(characterSheetObjectStore, characterSheetKey)
     .then((data) => {
       if (data) {
         setCharacterSheetData(data);
@@ -91,12 +105,34 @@ dbProm.then((db) => {
     })
     .catch(console.error);
 
+  db.get(characterSheetObjectStore, statisticsKey)
+    .then((data) => {
+      if (data) {
+        setStatisticsData(data);
+        notifyPropertyChanged();
+      }
+    })
+    .catch(console.error);
+
   const saveInterv = window.setInterval(() => {
-    const data = { id: 1, ...getCharacterSheetData() };
     db.transaction(characterSheetObjectStore, "readwrite");
-    db.put(characterSheetObjectStore, data, 1)
+    db.put(
+      characterSheetObjectStore,
+      getCharacterSheetData(),
+      characterSheetKey
+    )
       .then(() => {
-        console.log("saved");
+        console.log("sheet saved");
+      })
+      .catch((err) => {
+        window.clearInterval(saveInterv);
+        console.error(err);
+        alert(err);
+      });
+
+    db.put(characterSheetObjectStore, getStatisticsData(), statisticsKey)
+      .then(() => {
+        console.log("statistics saved");
       })
       .catch((err) => {
         window.clearInterval(saveInterv);
