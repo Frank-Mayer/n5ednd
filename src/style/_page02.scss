@@ -1,0 +1,135 @@
+@use "additionalStyles";
+@use "color";
+
+.p02 {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto 1fr 2fr;
+  gap: additionalStyles.$gap;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "s01 s01 s01"
+    "s02 s03 s03"
+    "s04 s04 s04";
+  grid-column-gap: additionalStyles.$gap;
+  grid-row-gap: additionalStyles.$gap;
+
+  > * {
+    width: 100%;
+    height: 100%;
+
+    &.s01 {
+      grid-area: s01;
+
+      @include additionalStyles.border;
+
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 1fr 1fr;
+      gap: additionalStyles.$gap;
+      grid-auto-flow: row;
+      grid-template-areas:
+        "name age height weight"
+        "villageRank eyes skin hair";
+
+      > :nth-child(1) {
+        grid-area: name;
+      }
+
+      > :nth-child(2) {
+        grid-area: age;
+      }
+
+      > :nth-child(3) {
+        grid-area: height;
+      }
+
+      > :nth-child(4) {
+        grid-area: weight;
+      }
+
+      > :nth-child(5) {
+        grid-area: villageRank;
+      }
+
+      > :nth-child(6) {
+        grid-area: eyes;
+      }
+
+      > :nth-child(7) {
+        grid-area: skin;
+      }
+
+      > :nth-child(8) {
+        grid-area: hair;
+      }
+    }
+
+    &.s02 {
+      grid-area: s02;
+
+      > * {
+        height: 100%;
+      }
+    }
+
+    &.s03 {
+      grid-area: s03;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      gap: 0;
+      grid-auto-flow: row;
+      grid-template-areas: "alliesAndOrganizations natureAffinities";
+
+      > :nth-child(1) {
+        grid-area: alliesAndOrganizations;
+
+        > .ListView {
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+          border-right-color: rgba(color.$foreground, 0.2);
+        }
+      }
+
+      > :nth-child(2) {
+        grid-area: natureAffinities;
+
+        > .ListView {
+          border-top-left-radius: 0;
+          border-bottom-left-radius: 0;
+          border-left-color: rgba(color.$foreground, 0.2);
+        }
+      }
+
+      > * {
+        height: 100%;
+        width: 100%;
+
+        > span {
+          display: block;
+          text-align: center;
+          color: rgba(color.$foreground, 0.5);
+        }
+
+        > .ListView {
+          height: calc(100% - var(--font-size-regular) * 1.5);
+          @include additionalStyles.border;
+        }
+
+        > * {
+          width: 100%;
+        }
+      }
+    }
+
+    &.s04 {
+      grid-area: s04;
+
+      > * {
+        height: 100%;
+      }
+    }
+  }
+}

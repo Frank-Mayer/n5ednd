@@ -52,6 +52,10 @@ const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
       if (data.statistics) {
         setStatisticsData(data.statistics);
       }
+
+      if (data.characterSheet && data.statistics) {
+        notifyPropertyChanged();
+      }
     })
     .catch((err) => {
       alert(err);

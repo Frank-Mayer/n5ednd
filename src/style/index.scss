@@ -3,12 +3,13 @@
 @import "JetBrainsMono";
 @import "input";
 @import "page01";
+@import "page02";
 @import "scrollbar";
 
 $max-page-width: 800px;
 
 :root {
-  --page-width: min(#{$max-page-width}, 100vw);
+  --page-width: min(#{$max-page-width}, calc(100vw - 2rem));
   --font-size-small: calc(var(--page-width) * 0.01);
   --font-size-regular: calc(var(--page-width) * 0.015);
   --font-size-big: calc(var(--page-width) * 0.045);
@@ -118,6 +119,8 @@ div#root {
     }
     &:not(#toolbar) {
       background-color: rgba(color.$background, 0.75);
+      width: calc(100vw - 4rem);
+      min-height: calc(var(--page-width) / 210 * 297);
     }
     padding: 1rem;
     max-width: $max-page-width;

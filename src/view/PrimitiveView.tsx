@@ -9,6 +9,7 @@ import { camelToHuman } from "./lib/string";
 
 interface Props<K extends keyof CharacterSheetModel> {
   index: K;
+  keySuffix?: string;
   readonly?: boolean;
   label?: string;
   style: "left" | "right" | "underline" | "big" | "no-label";
@@ -50,15 +51,19 @@ export const PrimitiveView = <
   );
   const t = typeMap[typeof val];
 
-  registerComponent(props.index, (x: T) => {
-    dispatch(t(x));
-  });
+  registerComponent(
+    props.index,
+    (x: T) => {
+      dispatch(t(x));
+    },
+    props.keySuffix
+  );
 
   return (
     <label className={"PrimitiveView " + props.style}>
       <span>{props.label ?? camelToHuman(props.index)}</span>
       <input
-        key={props.index}
+        key={props.index + (props.keySuffix ?? "")}
         type={getInputTypeFor(val)}
         value={String(val)}
         readOnly={props.readonly ?? false}

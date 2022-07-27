@@ -270,6 +270,29 @@ export class CharacterSheetModel {
   public equipment: Array<Equipment>;
   //#endregion
 
+  //#region page 2 section 2
+  public age: number;
+  public height: number;
+  public weight: number;
+  public eyes: string;
+  public skin: string;
+  public hair: string;
+  //#endregion
+
+  //#region page 2 section 3
+  public appearance: string;
+  //#endregion
+
+  //#region page 2 section 4
+  public villageRank: string;
+  public alliesAndOrganizations: Array<string>;
+  public natureAffinities: Array<string>;
+  //#endregion
+
+  //#region page 2 section 5
+  public backstory: string;
+  //#endregion
+
   constructor(data: Partial<CharacterSheetModel>) {
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
@@ -363,5 +386,20 @@ export class CharacterSheetModel {
     this.bonds = data.bonds ?? "";
     this.flaws = data.flaws ?? "";
     this.featuresTraitsProficiencies = data.featuresTraitsProficiencies ?? [];
+
+    this.age = data.age ?? 16; // years
+    this.height = data.height ?? 5.75; // ft
+    this.weight = data.weight ?? 155; // lb
+    this.eyes = data.eyes ?? "Blue";
+    this.skin = data.skin ?? "Light";
+    this.hair = data.hair ?? "Blond";
+
+    this.appearance = data.appearance ?? "";
+
+    this.villageRank = data.villageRank ?? "";
+    this.alliesAndOrganizations = data.alliesAndOrganizations ?? [];
+    this.natureAffinities = data.natureAffinities ?? [];
+
+    this.backstory = data.backstory ?? "";
   }
 }

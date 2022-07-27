@@ -43,7 +43,7 @@ export const ListView = <
           <tr className="header">
             {props.add ? <th></th> : null}
             {props.thead.map((x) => (
-              <th key={`${props.index}.head.${x}`}>{x}</th>
+              <th key={`${props.index}.__head__.${x}`}>{x}</th>
             ))}
           </tr>
           {val.map((_, i) => {
@@ -51,7 +51,7 @@ export const ListView = <
             const item = (getCharacterSheetData()[props.index] as T)[i];
 
             return (
-              <tr key={key}>
+              <tr key={key + ".__tr__"}>
                 {props.add ? (
                   <td>
                     <button
@@ -81,8 +81,8 @@ export const ListView = <
             );
           })}
         </tbody>
-        <tfoot>
-          {props.add ? (
+        {props.add ? (
+          <tfoot>
             <tr
               className="add"
               title="Add new item to the list"
@@ -94,8 +94,8 @@ export const ListView = <
             >
               <td>Add item</td>
             </tr>
-          ) : null}
-        </tfoot>
+          </tfoot>
+        ) : null}
       </table>
     ) : (
       <ul className="ListView">
@@ -104,11 +104,13 @@ export const ListView = <
           const item = (getCharacterSheetData()[props.index] as T)[i];
 
           return (
-            <li key={key}>
+            <li key={key + ".__li__"} data-key={key + ".__li__"}>
               {props.add ? (
                 <button
                   className="remove"
                   title="Remove this item from the list"
+                  key={`${key}.__remove__`}
+                  data-key={`${key}.__remove__`}
                   onClick={() => {
                     (getCharacterSheetData()[props.index] as T).splice(i, 1);
                     notifyPropertyChanged();
@@ -131,8 +133,14 @@ export const ListView = <
           <li
             className="add"
             title="Add new item to the list"
+            key={`${props.index}.__add__`}
             onClick={() => {
               props.add!(getCharacterSheetData()[props.index] as T);
+              console.debug(
+                "add to",
+                props.index,
+                getCharacterSheetData()[props.index]
+              );
               notifyPropertyChanged();
             }}
           >
