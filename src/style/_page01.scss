@@ -90,22 +90,12 @@ $gap: 8px;
     grid-area: 2 / 1 / 4 / 2;
 
     > table {
-      border-collapse: collapse;
-      border-spacing: 0.2rem 1rem;
+      height: 100%;
       width: 100%;
+      border-collapse: collapse;
 
       > tbody {
-        display: flex;
-        gap: 1rem;
-        flex-direction: column;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        align-items: stretch;
-
         > tr {
-          @include additionalStyles.border;
-          padding: 0.25em;
-
           > td {
             margin-left: auto;
             width: 100%;

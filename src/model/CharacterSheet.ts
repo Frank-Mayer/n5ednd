@@ -206,7 +206,23 @@ export class CharacterSheetModel {
   //#endregion
 
   //#region page 1 section 4
-  public armorClass: number;
+  public get armorBonus() {
+    let armor = 0;
+    for (const item of this.equipment) {
+      if (item.armor) {
+        armor += item.armor;
+      }
+    }
+    return armor;
+  }
+  public get armorClass() {
+    return (
+      10 +
+      this.armorBonus +
+      this.dexterityDice +
+      Math.floor(this.proficiencyBonus / 2)
+    );
+  }
   public initiative: number;
   public get speed(): number {
     return this.characterClan.speed;
@@ -315,7 +331,6 @@ export class CharacterSheetModel {
       ? data.equipment.map((x) => new Equipment(x))
       : [];
 
-    this.armorClass = data.armorClass ?? 0;
     this.initiative = data.initiative ?? 0;
     this.hitPointsMax = data.hitPointsMax ?? 0;
     this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
