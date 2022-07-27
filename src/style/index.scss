@@ -10,7 +10,7 @@ $max-page-width: 800px;
   --page-width: min(#{$max-page-width}, 100vw);
   --font-size-small: calc(var(--page-width) * 0.01);
   --font-size-regular: calc(var(--page-width) * 0.015);
-  --font-size-big: calc(var(--page-width) * 0.025);
+  --font-size-big: calc(var(--page-width) * 0.045);
   padding: 1rem;
   background: {
     color: color.$background;

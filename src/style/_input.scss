@@ -35,7 +35,7 @@
 .PrimitiveView.left,
 .EnumView.left {
   border: none;
-  height: 2rem;
+  height: fit-content;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -59,7 +59,7 @@
 .PrimitiveView.right,
 .EnumView.right {
   border: none;
-  height: 2rem;
+  height: fit-content;
   display: flex;
   align-items: center;
   flex-wrap: nowrap;
@@ -94,7 +94,7 @@
 
   > input,
   > select {
-    font-size: 2.25em;
+    font-size: var(--font-size-big);
     width: 100%;
     text-align: center;
   }
@@ -175,7 +175,7 @@ ol.ListView {
     align-items: center;
     justify-content: flex-start;
     gap: 0.5em;
-    height: var(--font-size-big) !important;
+    height: var(--font-size-regular) !important;
     width: 100%;
     font-size: var(--font-size-regular) !important;
 
