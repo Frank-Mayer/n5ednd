@@ -11,6 +11,7 @@ import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import * as lzwCompress from "lzwcompress";
 import { openDB } from "idb";
 import { CharacterSheetModel } from "./model/CharacterSheet";
+import { BoxArrowDown, BoxArrowInDown } from "react-bootstrap-icons";
 
 const save = () => {
   const data = {
@@ -61,7 +62,27 @@ const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
 };
 
 export const Upload: FC = () => (
-  <input type="file" accept=".lzw" multiple={false} onChange={onUpload} />
+  <label>
+    <BoxArrowInDown />
+    <span>Upload</span>
+    <input
+      style={{
+        display: "none",
+        visibility: "collapse",
+      }}
+      type="file"
+      accept=".lzw"
+      multiple={false}
+      onChange={onUpload}
+    />
+  </label>
+);
+
+export const Download: FC = () => (
+  <label onClick={save}>
+    <BoxArrowDown />
+    <span>Download</span>
+  </label>
 );
 
 window.addEventListener(

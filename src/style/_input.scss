@@ -181,7 +181,7 @@ ol.ListView {
 
     &:not(.add):hover {
       background-color: rgba(color.$foreground, 0.1);
-      > button.remove {
+      > button.remove > svg {
         background-color: red;
       }
     }
@@ -198,11 +198,19 @@ ol.ListView {
     }
 
     > button.remove {
+      display: block;
+      height: var(--font-size-regular);
+      width: fit-content;
       user-select: none;
-      padding: 0 0.45em;
       cursor: pointer;
       border-radius: 25%;
       background-color: rgba(color.$background, 0.1);
+      font-size: var(--font-size-regular);
+      > svg {
+        height: 100%;
+        width: 100%;
+        margin: auto;
+      }
     }
   }
 }
@@ -224,7 +232,7 @@ table.ListView {
     > tr:not(.header) {
       &:hover {
         background-color: rgba(color.$foreground, 0.1);
-        > td > button.remove {
+        > td > button.remove > svg {
           background-color: red;
         }
       }
@@ -234,11 +242,17 @@ table.ListView {
           width: 5em;
         }
         > button.remove {
-          padding: 0 0.45em;
+          height: var(--font-size-regular);
+          width: var(--font-size-regular);
           cursor: pointer;
           border-radius: 25%;
           background-color: rgba(color.$background, 0.1);
           user-select: none;
+          font-size: var(--font-size-regular);
+          > svg {
+            height: var(--font-size-regular);
+            width: var(--font-size-regular);
+          }
         }
       }
     }

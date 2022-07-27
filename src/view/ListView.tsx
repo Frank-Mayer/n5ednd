@@ -1,4 +1,5 @@
 import React from "react";
+import { X, XLg } from "react-bootstrap-icons";
 import { getCharacterSheetData } from "../data/CharacterSheetData";
 import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
@@ -65,7 +66,7 @@ export const ListView = <
                         notifyPropertyChanged();
                       }}
                     >
-                      x
+                      <X />
                     </button>
                   </td>
                 ) : null}
@@ -113,7 +114,7 @@ export const ListView = <
                     notifyPropertyChanged();
                   }}
                 >
-                  x
+                  <X />
                 </button>
               ) : null}
               {props.children({

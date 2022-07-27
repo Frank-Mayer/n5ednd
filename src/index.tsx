@@ -5,7 +5,7 @@ import { EnumView } from "./view/EnumView";
 import { EBackground } from "./model/Backgrounds/EBackground";
 import { EClass } from "./model/Classes/EClass";
 import { EClan } from "./model/Clans/EClan";
-import { Upload } from "./save";
+import { Download, Upload } from "./save";
 import { ListView } from "./view/ListView";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import { TextView } from "./view/TextView";
@@ -20,7 +20,10 @@ if (!rootEl) {
 
 ReactDOM.createRoot(rootEl!).render(
   <>
-    <Upload />
+    <div id="toolbar">
+      <Upload />
+      <Download />
+    </div>
     <div className="p01">
       <section className="s01">
         <PrimitiveView style="left" index="proficiencyBonus" readonly />
