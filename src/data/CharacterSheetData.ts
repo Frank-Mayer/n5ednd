@@ -5,7 +5,6 @@ let characterSheetData: CharacterSheetModel & {
 };
 
 export const setCharacterSheetData = (data: Partial<CharacterSheetModel>) => {
-  console.debug("setCharacterSheetData", data);
   characterSheetData = new CharacterSheetModel(data);
 };
 

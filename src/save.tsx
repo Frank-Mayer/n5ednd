@@ -122,7 +122,7 @@ dbProm.then((db) => {
       characterSheetKey
     )
       .then(() => {
-        console.log("sheet saved");
+        console.debug("sheet saved");
       })
       .catch((err) => {
         window.clearInterval(saveInterv);
@@ -132,7 +132,7 @@ dbProm.then((db) => {
 
     db.put(characterSheetObjectStore, getStatisticsData(), statisticsKey)
       .then(() => {
-        console.log("statistics saved");
+        console.debug("statistics saved");
       })
       .catch((err) => {
         window.clearInterval(saveInterv);

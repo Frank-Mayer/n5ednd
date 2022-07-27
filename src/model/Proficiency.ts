@@ -6,7 +6,6 @@ export class Proficiency {
   e: boolean;
 
   constructor(data: Partial<Proficiency>) {
-    console.debug("Proficiencies", data);
     this.label = data.label ?? "";
     this.value = data.value ?? 0;
     this.p = data.p ?? false;
