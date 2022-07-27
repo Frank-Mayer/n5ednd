@@ -13,6 +13,7 @@
   },
   "dependencies": {
     "@frank-mayer/magic": "^4.0.2",
+    "@frank-mayer/service-worker": "^0.0.3",
     "idb": "^7.0.2",
     "lzwcompress": "^1.1.0",
     "react": "^18.2.0",
