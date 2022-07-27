@@ -110,7 +110,7 @@ $gap: 8px;
               grid-area: 1 / 2 / 2 / 3;
               > li,
               > li > * {
-                font-size: 0.85em;
+                font-size: var(--font-size-small) !important;
               }
             }
           }
@@ -211,6 +211,10 @@ $gap: 8px;
 
     > .ListView {
       @include additionalStyles.border;
+      height: 100%;
+      input {
+        width: 100%;
+      }
     }
 
     > label {
@@ -222,5 +226,9 @@ $gap: 8px;
 
   > .s08 {
     grid-area: 4 / 1 / 5 / 3;
+
+    > table.ListView {
+      max-height: 200px;
+    }
   }
 }

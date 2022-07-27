@@ -10,6 +10,7 @@ import { ListView } from "./view/ListView";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import { TextView } from "./view/TextView";
 import { Equipment } from "./model/Equipment";
+import { Proficiency } from "./model/Proficiency";
 
 const rootEl = document.getElementById("root");
 
@@ -46,7 +47,15 @@ ReactDOM.createRoot(rootEl!).render(
                 <PrimitiveView style="no-label" index="strengthDice" readonly />
               </th>
               <td>
-                <ListView index="strengthProficiencies">
+                <ListView
+                  index="strengthProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add strength Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -97,7 +106,15 @@ ReactDOM.createRoot(rootEl!).render(
                 />
               </th>
               <td>
-                <ListView index="dexterityProficiencies">
+                <ListView
+                  index="dexterityProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add dexterity Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -148,7 +165,15 @@ ReactDOM.createRoot(rootEl!).render(
                 />
               </th>
               <td>
-                <ListView index="constitutionProficiencies">
+                <ListView
+                  index="constitutionProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add constitution Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -199,7 +224,15 @@ ReactDOM.createRoot(rootEl!).render(
                 />
               </th>
               <td>
-                <ListView index="intelligenceProficiencies">
+                <ListView
+                  index="intelligenceProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add intelligence Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -246,7 +279,15 @@ ReactDOM.createRoot(rootEl!).render(
                 <PrimitiveView style="no-label" index="wisdomDice" readonly />
               </th>
               <td>
-                <ListView index="wisdomProficiencies">
+                <ListView
+                  index="wisdomProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add wisdom Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -293,7 +334,15 @@ ReactDOM.createRoot(rootEl!).render(
                 <PrimitiveView style="no-label" index="charismaDice" readonly />
               </th>
               <td>
-                <ListView index="charismaProficiencies">
+                <ListView
+                  index="charismaProficiencies"
+                  add={(arr) => {
+                    const newItem = prompt("Add charisma Proficiency");
+                    if (newItem) {
+                      arr.push(new Proficiency({ label: newItem }));
+                    }
+                  }}
+                >
                   {({ item, key }) => (
                     <>
                       <input
@@ -383,7 +432,7 @@ ReactDOM.createRoot(rootEl!).render(
         <PrimitiveView index="ryo" style="left" />
         <ListView
           index="equipment"
-          thead={["Name", "Armor", "Bulk"]}
+          thead={["Name", "Armor", "Bulk", "Count"]}
           add={(arr) => {
             const newItem = prompt("New Equipment name");
             if (newItem) {
@@ -423,6 +472,18 @@ ReactDOM.createRoot(rootEl!).render(
                   value={item.bulk}
                   onChange={(ev) => {
                     item.bulk = Number.parseInt(ev.target.value);
+                    notifyPropertyChanged();
+                  }}
+                />
+              </td>
+              <td>
+                <input
+                  key={key + ".count"}
+                  type="number"
+                  min="1"
+                  value={item.count}
+                  onChange={(ev) => {
+                    item.count = Number.parseInt(ev.target.value);
                     notifyPropertyChanged();
                   }}
                 />

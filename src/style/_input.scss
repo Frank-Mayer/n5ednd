@@ -160,10 +160,13 @@
 
 ul.ListView,
 ol.ListView {
-  display: flex;
-  flex-direction: column;
-  flex-wrap: nowrap;
-  overflow-y: auto;
+  display: grid;
+  grid-template-rows: repeat(auto-fill, minmax(2em, 1fr));
+  grid-template-columns: 1fr;
+  height: fit-content;
+  align-items: end;
+  justify-items: stretch;
+  justify-content: space-between;
 
   > li {
     display: flex;
@@ -172,6 +175,9 @@ ol.ListView {
     align-items: center;
     justify-content: flex-start;
     gap: 0.5em;
+    height: var(--font-size-big) !important;
+    width: 100%;
+    font-size: var(--font-size-regular) !important;
 
     &:not(.add):hover {
       background-color: rgba(color.$foreground, 0.1);
@@ -181,6 +187,7 @@ ol.ListView {
     }
 
     &.add {
+      user-select: none;
       padding: 2px 0.5em;
       justify-content: flex-end;
       cursor: pointer;
@@ -191,6 +198,7 @@ ol.ListView {
     }
 
     > button.remove {
+      user-select: none;
       padding: 0 0.45em;
       cursor: pointer;
       border-radius: 25%;
@@ -199,26 +207,47 @@ ol.ListView {
   }
 }
 
+.ListView {
+  overflow: auto !important;
+}
+
 table.ListView {
-  tbody > tr:not(.header) {
-    &:hover {
-      background-color: rgba(color.$foreground, 0.1);
-      > td > button.remove {
-        background-color: red;
-      }
+  display: block;
+  width: 100%;
+
+  tbody {
+    > *,
+    > * > * {
+      text-align: left;
     }
 
-    td > button.remove {
-      padding: 0 0.45em;
-      cursor: pointer;
-      border-radius: 25%;
-      background-color: rgba(color.$background, 0.1);
+    > tr:not(.header) {
+      &:hover {
+        background-color: rgba(color.$foreground, 0.1);
+        > td > button.remove {
+          background-color: red;
+        }
+      }
+
+      td {
+        > input[type="number"] {
+          width: 5em;
+        }
+        > button.remove {
+          padding: 0 0.45em;
+          cursor: pointer;
+          border-radius: 25%;
+          background-color: rgba(color.$background, 0.1);
+          user-select: none;
+        }
+      }
     }
   }
 
   tfoot > tr.add {
     cursor: pointer;
     width: max-content;
+    user-select: none;
 
     &:hover {
       background-color: rgba(yellowgreen, 0.1);
