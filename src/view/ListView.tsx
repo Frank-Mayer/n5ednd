@@ -1,5 +1,5 @@
 import React from "react";
-import { X, XLg } from "react-bootstrap-icons";
+import { X } from "react-bootstrap-icons";
 import { getCharacterSheetData } from "../data/CharacterSheetData";
 import type { CharacterSheetModel } from "../model/CharacterSheet";
 import {
