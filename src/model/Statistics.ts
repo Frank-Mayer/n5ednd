@@ -1,4 +1,10 @@
 export class StatisticsModel {
+  //#region tool methods
+  public toJSON(): this {
+    return this;
+  }
+  //#endregion
+
   public d4Throws: Array<number>;
   public d6Throws: Array<number>;
   public d8Throws: Array<number>;

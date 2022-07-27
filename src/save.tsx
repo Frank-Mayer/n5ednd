@@ -14,8 +14,8 @@ import { CharacterSheetModel } from "./model/CharacterSheet";
 
 const save = () => {
   const data = {
-    characterSheet: getCharacterSheetData(),
-    statistics: getStatisticsData(),
+    characterSheet: getCharacterSheetData().toJSON(),
+    statistics: getStatisticsData().toJSON(),
   };
   const json = JSON.stringify(data);
   const compr = lzwCompress
@@ -114,32 +114,42 @@ dbProm.then((db) => {
     })
     .catch(console.error);
 
-  const saveInterv = window.setInterval(() => {
-    db.transaction(characterSheetObjectStore, "readwrite");
-    db.put(
-      characterSheetObjectStore,
-      getCharacterSheetData(),
-      characterSheetKey
-    )
-      .then(() => {
-        console.debug("sheet saved");
-      })
-      .catch((err) => {
-        window.clearInterval(saveInterv);
-        console.error(err);
-        alert(err);
-      });
+  let storeTimeout: number | undefined;
 
-    db.put(characterSheetObjectStore, getStatisticsData(), statisticsKey)
-      .then(() => {
-        console.debug("statistics saved");
-      })
-      .catch((err) => {
-        window.clearInterval(saveInterv);
-        console.error(err);
-        alert(err);
-      });
-  }, 2000);
+  window.addEventListener(
+    "message",
+    (ev) => {
+      if (ev.data.type === "property-changed") {
+        if (typeof storeTimeout !== "undefined") {
+          clearTimeout(storeTimeout);
+          storeTimeout = undefined;
+        }
+
+        storeTimeout = window.setTimeout(() => {
+          storeTimeout = undefined;
+          db.transaction(characterSheetObjectStore, "readwrite");
+          db.put(
+            characterSheetObjectStore,
+            getCharacterSheetData().toJSON(),
+            characterSheetKey
+          ).catch((err) => {
+            console.error(err);
+            alert(err);
+          });
+
+          db.put(
+            characterSheetObjectStore,
+            getStatisticsData().toJSON(),
+            statisticsKey
+          ).catch((err) => {
+            console.error(err);
+            alert(err);
+          });
+        }, 3000);
+      }
+    },
+    { passive: true }
+  );
 });
 
 export {};

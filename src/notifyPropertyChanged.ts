@@ -15,6 +15,7 @@ export const notifyPropertyChanged = () => {
       dispatch(val);
     }
   }
+  window.postMessage({ type: "property-changed" }, "*");
 };
 
 export const registerComponent = (

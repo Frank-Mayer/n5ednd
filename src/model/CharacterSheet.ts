@@ -27,8 +27,14 @@ const emptyProficiency = (label: string = "Saving Throw"): Proficiency => ({
 });
 
 export class CharacterSheetModel {
-  private readonly characterClass: IClass;
-  private readonly characterClan: IClan;
+  private characterClass: IClass;
+  private characterClan: IClan;
+
+  //#region tool methods
+  public toJSON(): this {
+    return { ...this, clan: this.clan, class: this.class };
+  }
+  //#endregion
 
   //#region page 1 section 1
   public get proficiencyBonus() {
@@ -43,8 +49,21 @@ export class CharacterSheetModel {
 
   //#region page 1 section 2
   public name: string;
-  public clan: EClan;
-  public class: EClass;
+  public set clan(value: EClan) {
+    const enumValue = importEnum(EClan, value, EClan.Uzumaki);
+    this.characterClan = new (Clans.from(enumValue))();
+  }
+  public get clan() {
+    return this.characterClan.ident;
+  }
+
+  public set class(value: EClass) {
+    const enumValue = importEnum(EClass, value, EClass["Scout-Nin"]);
+    this.characterClass = new (Classes.from(enumValue))();
+  }
+  public get class() {
+    return this.characterClass.ident;
+  }
   public playerName: string;
   public level: number;
   public background: EBackground;
@@ -258,8 +277,10 @@ export class CharacterSheetModel {
 
     this.name = data.name ?? "Naruto";
     this.clan = importEnum(EClan, data.clan, EClan.Uzumaki);
+    this.characterClan ??= new (Clans.from(this.clan))();
     this.playerName = data.playerName ?? "Player 01";
     this.class = importEnum(EClass, data.class, EClass["Scout-Nin"]);
+    this.characterClass ??= new (Classes.from(this.class))();
     this.level = data.level ?? 1;
     this.background = importEnum(
       EBackground,
@@ -268,8 +289,6 @@ export class CharacterSheetModel {
     );
     this.rank = data.rank ?? 1;
     this.xp = data.xp ?? 0;
-    this.characterClass = new (Classes.from(this.class))();
-    this.characterClan = new (Clans.from(this.clan))();
 
     this.strength = data.strength ?? 10;
     this._strengthProficiencies = data._strengthProficiencies

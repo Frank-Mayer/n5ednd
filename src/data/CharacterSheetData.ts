@@ -12,4 +12,6 @@ export const getCharacterSheetData = (): CharacterSheetModel & {
   [key in keyof CharacterSheetModel]: CharacterSheetModel[key];
 } => characterSheetData;
 
+(window as any).getCharacterSheetData = getCharacterSheetData;
+
 setCharacterSheetData({});
