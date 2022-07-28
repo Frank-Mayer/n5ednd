@@ -20,7 +20,7 @@ textarea::before,
 select,
 select::after,
 select::before {
-  border: none !important;
-  outline: none !important;
+  border: none;
+  outline: none;
   filter: none;
 }
