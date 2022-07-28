@@ -4,6 +4,7 @@ import { notifyPropertyChanged } from "../../notifyPropertyChanged";
 import NumericInput from "react-numeric-input";
 import { ListView } from "../ListView";
 import { client } from "@frank-mayer/magic";
+import { formatSigned } from "../lib/string";
 
 export const Section06 = () => (
   <section className="s06">
@@ -33,10 +34,10 @@ export const Section06 = () => (
           <td>
             <NumericInput
               key={key + ".userChakra"}
-              type="number"
               step={1}
               mobile={client.isMobile}
               value={item.userChakra}
+              format={formatSigned}
               onChange={(newValue) => {
                 if (newValue) {
                   item.userChakra = newValue;
@@ -48,10 +49,10 @@ export const Section06 = () => (
           <td>
             <NumericInput
               key={key + ".userHealth"}
-              type="number"
               step={1}
               mobile={client.isMobile}
               value={item.userHealth}
+              format={formatSigned}
               onChange={(newValue) => {
                 if (newValue) {
                   item.userHealth = newValue;
@@ -63,10 +64,10 @@ export const Section06 = () => (
           <td>
             <NumericInput
               key={key + ".targetChakra"}
-              type="number"
               step={1}
               mobile={client.isMobile}
               value={item.targetChakra}
+              format={formatSigned}
               onChange={(newValue) => {
                 if (newValue) {
                   item.targetChakra = newValue;
@@ -78,10 +79,10 @@ export const Section06 = () => (
           <td>
             <NumericInput
               key={key + ".targetHealth"}
-              type="number"
               step={1}
               mobile={client.isMobile}
               value={item.targetHealth}
+              format={formatSigned}
               onChange={(newValue) => {
                 if (newValue) {
                   item.targetHealth = newValue;
