@@ -8,7 +8,7 @@ import { getStatisticsData, setStatisticsData } from "./data/StatisticsData";
 import { EClan } from "./model/Clans/EClan";
 import { EClass } from "./model/Classes/EClass";
 import { notifyPropertyChanged } from "./notifyPropertyChanged";
-import * as lzwCompress from "lzwcompress";
+
 import { openDB } from "idb";
 import { CharacterSheetModel } from "./model/CharacterSheet";
 import {
@@ -17,6 +17,8 @@ import {
   Check2,
   Exclamation,
 } from "react-bootstrap-icons";
+import { compress, compressionSupported, decompress } from "./lib/compress";
+import { StatisticsModel } from "./model/Statistics";
 
 let savedStateDispatch:
   | React.Dispatch<React.SetStateAction<boolean>>
@@ -41,17 +43,12 @@ export const SavedStatus = () => {
   );
 };
 
-const save = () => {
+const save = async () => {
   const data = {
     characterSheet: getCharacterSheetData().toJSON(),
     statistics: getStatisticsData().toJSON(),
   };
-  const json = JSON.stringify(data);
-  const compr = lzwCompress
-    .pack(json)
-    .map((x) => String.fromCharCode(x))
-    .join("");
-  const blob = new Blob([compr], { type: "text/plain" });
+  const { blob, ext } = await compress(data);
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
@@ -59,7 +56,7 @@ const save = () => {
     data.characterSheet.name,
     EClan[data.characterSheet.clan],
     EClass[data.characterSheet.class],
-    `Lv${data.characterSheet.level}.lzw`,
+    `Lv${data.characterSheet.level}.${ext}`,
   ].join(" ");
   a.click();
   URL.revokeObjectURL(url);
@@ -69,21 +66,27 @@ const save = () => {
 const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
   const file = ev.target.files![0];
   file
-    .text()
-    .then((text) => {
-      const data = JSON.parse(
-        lzwCompress.unpack(text.split("").map((x) => x.charCodeAt(0)))
-      );
-      if (data.characterSheet) {
-        setCharacterSheetData(data.characterSheet);
-      }
-      if (data.statistics) {
-        setStatisticsData(data.statistics);
-      }
+    .arrayBuffer()
+    .then((buffer) => {
+      decompress<{
+        characterSheet: CharacterSheetModel;
+        statistics: StatisticsModel;
+      }>(buffer, file.name.split(".").pop() ?? "")
+        .then((data) => {
+          if (data.characterSheet) {
+            setCharacterSheetData(data.characterSheet);
+          }
+          if (data.statistics) {
+            setStatisticsData(data.statistics);
+          }
 
-      if (data.characterSheet && data.statistics) {
-        notifyPropertyChanged();
-      }
+          if (data.characterSheet && data.statistics) {
+            notifyPropertyChanged();
+          }
+        })
+        .catch((err) => {
+          alert(err);
+        });
     })
     .catch((err) => {
       alert(err);
@@ -103,7 +106,7 @@ export const Upload: FC = () => (
         visibility: "collapse",
       }}
       type="file"
-      accept=".lzw"
+      accept={compressionSupported ? ".gz,.json" : ".json"}
       multiple={false}
       onChange={onUpload}
     />
