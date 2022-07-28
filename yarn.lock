@@ -1513,6 +1513,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react-numeric-input@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "@types/react-numeric-input@npm:2.2.4"
+  dependencies:
+    "@types/react": "*"
+  checksum: 9f1363e5a8c37705aaf2fa70b8c1cba6da15bc6271ac345c955f96a2c976775ef3b59c270371cc2e1e675982b9887b06fe57507f9c6c503538084f12695fa4ba
+  languageName: node
+  linkType: hard
+
 "@types/react@npm:*, @types/react@npm:^18.0.15":
   version: 18.0.15
   resolution: "@types/react@npm:18.0.15"
@@ -5389,12 +5398,14 @@ __metadata:
     "@frank-mayer/service-worker": ^0.0.3
     "@types/react": ^18.0.15
     "@types/react-dom": ^18.0.6
+    "@types/react-numeric-input": ^2.2.4
     idb: ^7.0.2
     lzwcompress: ^1.1.0
     parcel-bundler: ^1.12.5
     react: ^18.2.0
     react-bootstrap-icons: ^1.8.4
     react-dom: ^18.2.0
+    react-numeric-input: ^2.2.3
     sass: ^1.54.0
     typescript: ^4.7.4
   languageName: unknown
@@ -6653,6 +6664,15 @@ __metadata:
   version: 16.13.1
   resolution: "react-is@npm:16.13.1"
   checksum: f7a19ac3496de32ca9ae12aa030f00f14a3d45374f1ceca0af707c831b2a6098ef0d6bdae51bd437b0a306d7f01d4677fcc8de7c0d331eb47ad0f46130e53c5f
+  languageName: node
+  linkType: hard
+
+"react-numeric-input@npm:^2.2.3":
+  version: 2.2.3
+  resolution: "react-numeric-input@npm:2.2.3"
+  peerDependencies:
+    react: ">=0.14.0 || ^15.6.1 || ^16.0.0"
+  checksum: 99b698c8e2ace4a05ce07147251f867801bb2d49e64941a8c6f41001b4dbde10c7b33dfc00941281de44cc566621f714842c6d885234314e00f0dd90241ddaa4
   languageName: node
   linkType: hard
 

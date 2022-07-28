@@ -1,6 +1,7 @@
 import React from "react";
 import { Equipment } from "../../model/Equipment";
 import { notifyPropertyChanged } from "../../notifyPropertyChanged";
+
 import { ListView } from "../ListView";
 import { PrimitiveView } from "../PrimitiveView";
 
@@ -36,7 +37,7 @@ export const Section08 = () => (
               min="0"
               value={item.armor}
               onChange={(ev) => {
-                item.armor = Number.parseInt(ev.target.value);
+                item.armor = Number.parseInt(ev.target.value) ?? 0;
                 notifyPropertyChanged();
               }}
             />
@@ -45,11 +46,12 @@ export const Section08 = () => (
             <input
               key={key + ".bulk"}
               type="number"
-              min="0"
               value={item.bulk}
               onChange={(ev) => {
-                item.bulk = Number.parseInt(ev.target.value);
-                notifyPropertyChanged();
+                if (ev.target.value !== "-") {
+                  item.bulk = Number.parseInt(ev.target.value) ?? 0;
+                  notifyPropertyChanged();
+                }
               }}
             />
           </td>
@@ -60,7 +62,7 @@ export const Section08 = () => (
               min="1"
               value={item.count}
               onChange={(ev) => {
-                item.count = Number.parseInt(ev.target.value);
+                item.count = Number.parseInt(ev.target.value) ?? 0;
                 notifyPropertyChanged();
               }}
             />

@@ -6,6 +6,7 @@ import {
   registerComponent,
 } from "../notifyPropertyChanged";
 import { camelToHuman } from "./lib/string";
+import { retriggerDelay } from "./lib/timing";
 
 interface Props<K extends keyof CharacterSheetModel> {
   index: K;

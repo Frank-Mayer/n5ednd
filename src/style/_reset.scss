@@ -10,3 +10,17 @@
   border: none;
   overflow: hidden;
 }
+
+input,
+input::after,
+input::before,
+textarea,
+textarea::after,
+textarea::before,
+select,
+select::after,
+select::before {
+  border: none !important;
+  outline: none !important;
+  filter: none;
+}

@@ -1,5 +1,6 @@
 import React from "react";
 import { notifyPropertyChanged } from "../../notifyPropertyChanged";
+
 import { ListView } from "../ListView";
 
 export const Section07 = () => (

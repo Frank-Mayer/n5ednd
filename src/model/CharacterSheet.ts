@@ -7,6 +7,7 @@ import * as Classes from "./Classes/index";
 import * as Clans from "./Clans/index";
 import { Equipment } from "./Equipment";
 import { Proficiency } from "./Proficiency";
+import { Item } from "./Item";
 
 const importEnum = (e: any, value: string | number | undefined, def: any) => {
   if (value === undefined) {
@@ -262,6 +263,10 @@ export class CharacterSheetModel {
   //#endregion
 
   //#region page 1 section 6
+  public usableItems: Array<Item>;
+  //#endregion
+
+  //#region page 1 section 7
   public featuresTraitsProficiencies: Array<string>;
   //#endregion
 
@@ -386,6 +391,8 @@ export class CharacterSheetModel {
     this.bonds = data.bonds ?? "";
     this.flaws = data.flaws ?? "";
     this.featuresTraitsProficiencies = data.featuresTraitsProficiencies ?? [];
+
+    this.usableItems = data.usableItems ?? [];
 
     this.age = data.age ?? 16; // years
     this.height = data.height ?? 5.75; // ft

@@ -268,3 +268,16 @@ table.ListView {
     }
   }
 }
+
+.react-numeric-input {
+  padding: 0 !important;
+  > input {
+    border: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+  }
+  > b {
+    display: none;
+    pointer-events: none;
+  }
+}

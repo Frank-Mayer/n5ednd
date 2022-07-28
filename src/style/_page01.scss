@@ -199,6 +199,18 @@
 
   > .s06 {
     grid-area: 3 / 2 / 4 / 3;
+
+    > .ListView {
+      @include additionalStyles.border;
+      height: 100%;
+      td > input[type="text"] {
+        width: calc(8 * var(--font-size-regular));
+      }
+      td > input[type="number"],
+      td > .react-numeric-input {
+        width: calc(4 * var(--font-size-regular));
+      }
+    }
   }
 
   > .s07 {
