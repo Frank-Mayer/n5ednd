@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { Download, Upload } from "./save";
+import { Download, SavedStatus, Upload } from "./save";
 import { Page01 } from "./view/Page01";
 import { Page02 } from "./view/Page02";
 
@@ -13,6 +13,7 @@ if (!rootEl) {
 ReactDOM.createRoot(rootEl!).render(
   <React.StrictMode>
     <div id="toolbar">
+      <SavedStatus />
       <Upload />
       <Download />
     </div>

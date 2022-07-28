@@ -11,7 +11,35 @@ import { notifyPropertyChanged } from "./notifyPropertyChanged";
 import * as lzwCompress from "lzwcompress";
 import { openDB } from "idb";
 import { CharacterSheetModel } from "./model/CharacterSheet";
-import { BoxArrowDown, BoxArrowInDown } from "react-bootstrap-icons";
+import {
+  BoxArrowDown,
+  BoxArrowInDown,
+  Check2,
+  Exclamation,
+} from "react-bootstrap-icons";
+
+let savedStateDispatch:
+  | React.Dispatch<React.SetStateAction<boolean>>
+  | undefined = undefined;
+
+let setSavedStatus = (saved: boolean) => {
+  if (savedStateDispatch) {
+    savedStateDispatch(saved);
+  }
+};
+
+export const SavedStatus = () => {
+  const [val, dispatch] = React.useState<boolean>(true);
+
+  savedStateDispatch = dispatch;
+
+  return (
+    <label className="no-click">
+      {val ? <Check2 /> : <Exclamation />}
+      <span>{val ? <>Saved</> : <>Saving...</>}</span>
+    </label>
+  );
+};
 
 const save = () => {
   const data = {
@@ -145,6 +173,8 @@ dbProm.then((db) => {
     "message",
     (ev) => {
       if (ev.data.type === "property-changed") {
+        setSavedStatus(false);
+
         if (typeof storeTimeout !== "undefined") {
           clearTimeout(storeTimeout);
           storeTimeout = undefined;
@@ -157,10 +187,14 @@ dbProm.then((db) => {
             characterSheetObjectStore,
             getCharacterSheetData().toJSON(),
             characterSheetKey
-          ).catch((err) => {
-            console.error(err);
-            alert(err);
-          });
+          )
+            .then(() => {
+              setSavedStatus(true);
+            })
+            .catch((err) => {
+              console.error(err);
+              alert(err);
+            });
 
           db.put(
             characterSheetObjectStore,

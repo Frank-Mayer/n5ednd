@@ -92,7 +92,6 @@ div#root {
       }
 
       > label {
-        cursor: pointer;
         display: grid;
         grid-template-rows: auto auto;
         grid-template-columns: auto;
@@ -112,8 +111,11 @@ div#root {
           font-size: var(--font-size-small);
         }
 
-        &:hover {
-          filter: drop-shadow(0 0 0.5em rgba(color.$background, 0.75));
+        &:not(.no-click) {
+          cursor: pointer;
+          &:hover {
+            filter: drop-shadow(0 0 0.5em rgba(color.$background, 0.75));
+          }
         }
       }
     }
