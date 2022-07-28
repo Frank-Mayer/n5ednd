@@ -50,14 +50,14 @@ export const compress = async (data: object) => {
 };
 
 export const decompress = async <T extends object = object>(
-  buffer: ArrayBuffer,
+  file: File,
   ext: string
 ): Promise<T> => {
   if (ext === "gz") {
     if (compressionSupported) {
       const ds = new DecompressionStream("gzip");
       const writer = ds.writable.getWriter();
-      writer.write(buffer);
+      writer.write(await file.arrayBuffer());
       writer.close();
 
       const decompressed = await readStream!(ds.readable);
@@ -66,7 +66,7 @@ export const decompress = async <T extends object = object>(
       throw new Error("Compression API not supported");
     }
   } else if (ext === "json") {
-    return JSON.parse(textDecoder!.decode(buffer));
+    return JSON.parse(await file.text());
   } else {
     throw new Error(`Unsupported file type "${ext}"`);
   }

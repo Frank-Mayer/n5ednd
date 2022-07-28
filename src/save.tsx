@@ -65,28 +65,21 @@ const save = async () => {
 
 const onUpload = (ev: React.ChangeEvent<HTMLInputElement>) => {
   const file = ev.target.files![0];
-  file
-    .arrayBuffer()
-    .then((buffer) => {
-      decompress<{
-        characterSheet: CharacterSheetModel;
-        statistics: StatisticsModel;
-      }>(buffer, file.name.split(".").pop() ?? "")
-        .then((data) => {
-          if (data.characterSheet) {
-            setCharacterSheetData(data.characterSheet);
-          }
-          if (data.statistics) {
-            setStatisticsData(data.statistics);
-          }
+  decompress<{
+    characterSheet: CharacterSheetModel;
+    statistics: StatisticsModel;
+  }>(file, file.name.split(".").pop() ?? "")
+    .then((data) => {
+      if (data.characterSheet) {
+        setCharacterSheetData(data.characterSheet);
+      }
+      if (data.statistics) {
+        setStatisticsData(data.statistics);
+      }
 
-          if (data.characterSheet && data.statistics) {
-            notifyPropertyChanged();
-          }
-        })
-        .catch((err) => {
-          alert(err);
-        });
+      if (data.characterSheet && data.statistics) {
+        notifyPropertyChanged();
+      }
     })
     .catch((err) => {
       alert(err);
