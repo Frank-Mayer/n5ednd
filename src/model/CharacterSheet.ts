@@ -10,6 +10,71 @@ import { Proficiency } from "./Proficiency";
 import { Item } from "./Item";
 import { Jutsu } from "./Jutsu";
 
+const levelToExp = (level: number): number => {
+  switch (level) {
+    case 1:
+      return 0;
+    case 2:
+      return 50;
+    case 3:
+      return 75;
+    case 4:
+      return 100;
+    case 5:
+      return 150;
+    case 6:
+      return 200;
+    case 7:
+      return 350;
+    case 8:
+      return 475;
+    case 9:
+      return 600;
+    case 10:
+      return 725;
+    case 11:
+      return 850;
+    case 12:
+      return 1000;
+    case 13:
+      return 1200;
+    case 14:
+      return 1400;
+    case 15:
+      return 1600;
+    case 16:
+      return 1800;
+    case 17:
+      return 2100;
+    case 18:
+      return 2400;
+    case 19:
+      return 2700;
+    case 20:
+      return 3000;
+  }
+
+  if (level > 20) {
+    return 4000;
+  } else {
+    return 0;
+  }
+};
+
+const expToLevel = (exp: number): number => {
+  if (exp < 0) {
+    return 0;
+  }
+
+  for (let i = 1; i <= 20; i++) {
+    if (levelToExp(i) > exp) {
+      return i - 1;
+    }
+  }
+
+  return 20;
+};
+
 const importEnum = (e: any, value: string | number | undefined, def: any) => {
   if (value === undefined) {
     return def;
@@ -67,7 +132,16 @@ export class CharacterSheetModel {
     return this.characterClass.ident;
   }
   public playerName: string;
-  public level: number;
+  public _level: number;
+  public get level(): number {
+    return this._level;
+  }
+  public set level(value: number) {
+    this._level = value;
+    const minXp = levelToExp(value);
+    const maxXp = levelToExp(value + 1) - 1;
+    this._xp = Math.min(Math.max(this._xp, minXp), maxXp);
+  }
   public background: EBackground;
   public get rank(): string {
     if (this.level < 5) {
@@ -84,7 +158,14 @@ export class CharacterSheetModel {
     }
     return "S";
   }
-  public xp: number;
+  public _xp: number;
+  public get xp(): number {
+    return this._xp;
+  }
+  public set xp(value: number) {
+    this._xp = value;
+    this._level = expToLevel(value);
+  }
   //#endregion
 
   //#region page 1 section 3
@@ -387,13 +468,13 @@ export class CharacterSheetModel {
     this.playerName = data.playerName ?? "Player 01";
     this.class = importEnum(EClass, data.class, EClass["Scout-Nin"]);
     this.characterClass ??= new (Classes.from(this.class))();
-    this.level = data.level ?? 1;
+    this._level = data._level ?? 1;
     this.background = importEnum(
       EBackground,
       data.background,
       EBackground["Trouble Maker"]
     );
-    this.xp = data.xp ?? 0;
+    this._xp = data._xp ?? 0;
 
     this.strength = data.strength ?? 10;
     this._strengthProficiencies = data._strengthProficiencies
