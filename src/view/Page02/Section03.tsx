@@ -19,7 +19,6 @@ export const Section03 = () => (
           return (
             <input
               key={key}
-              data-key={key}
               type="text"
               value={item}
               onChange={(ev) => {
@@ -46,7 +45,6 @@ export const Section03 = () => (
           return (
             <input
               key={key}
-              data-key={key}
               type="text"
               value={item}
               onChange={(ev) => {

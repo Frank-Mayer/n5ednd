@@ -104,13 +104,12 @@ export const ListView = <
           const item = (getCharacterSheetData()[props.index] as T)[i];
 
           return (
-            <li key={key + ".__li__"} data-key={key + ".__li__"}>
+            <li key={key + ".__li__"}>
               {props.add ? (
                 <button
                   className="remove"
                   title="Remove this item from the list"
                   key={`${key}.__remove__`}
-                  data-key={`${key}.__remove__`}
                   onClick={() => {
                     (getCharacterSheetData()[props.index] as T).splice(i, 1);
                     notifyPropertyChanged();
