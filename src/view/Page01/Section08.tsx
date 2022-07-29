@@ -37,7 +37,7 @@ export const Section08 = () => (
               min="0"
               value={item.armor}
               onChange={(ev) => {
-                item.armor = Number.parseInt(ev.target.value) ?? 0;
+                item.armor = Number.parseInt(ev.target.value, 10) ?? 0;
                 notifyPropertyChanged();
               }}
             />
@@ -49,7 +49,7 @@ export const Section08 = () => (
               value={item.bulk}
               onChange={(ev) => {
                 if (ev.target.value !== "-") {
-                  item.bulk = Number.parseInt(ev.target.value) ?? 0;
+                  item.bulk = Number.parseInt(ev.target.value, 10) ?? 0;
                   notifyPropertyChanged();
                 }
               }}
@@ -62,7 +62,7 @@ export const Section08 = () => (
               min="1"
               value={item.count}
               onChange={(ev) => {
-                item.count = Number.parseInt(ev.target.value) ?? 0;
+                item.count = Number.parseInt(ev.target.value,10) ?? 0;
                 notifyPropertyChanged();
               }}
             />

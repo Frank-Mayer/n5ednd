@@ -43,7 +43,7 @@ export const EnumView = <
         }}
       >
         {Object.keys(props.enum)
-          .filter((x) => !isNaN(parseInt(x)))
+          .filter((x) => !isNaN(parseInt(x, 10)))
           .map((key) => {
             return (
               <option key={props.index + key} value={key}>

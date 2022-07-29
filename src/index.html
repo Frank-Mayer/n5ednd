@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="./img/favicon.svg" type="image/svg+xml" />
     <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="preload" href="./style/index.scss" as="style" />
     <title>Naruto 5E D&D E-Character-Sheet</title>
   </head>
   <body>
@@ -12,7 +13,7 @@
     <div id="root">
       <!-- Your react app will be rendered here -->
     </div>
-    <script src="./index.tsx"></script>
+    <script defer async src="./index.tsx"></script>
     <link rel="stylesheet" href="./style/index.scss" />
     <script>
       if (

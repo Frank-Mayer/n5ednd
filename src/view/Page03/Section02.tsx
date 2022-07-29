@@ -12,7 +12,7 @@ export const Section02 = () => (
         const name = prompt("Name of the Jutsu");
         if (name === null) return;
 
-        const chakraCost = Number.parseInt(prompt("Chakra Cost") ?? "");
+        const chakraCost = Number.parseInt(prompt("Chakra Cost") ?? "",10);
         if (Number.isNaN(chakraCost)) return;
 
         const description = prompt("Description of the Jutsu");

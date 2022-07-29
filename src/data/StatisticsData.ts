@@ -10,4 +10,6 @@ export const setStatisticsData = (data: Partial<StatisticsModel>) => {
   statisticsData = new StatisticsModel(data);
 };
 
+(window as any).getStatisticsData = getStatisticsData;
+
 setStatisticsData({});

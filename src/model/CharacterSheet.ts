@@ -13,7 +13,7 @@ import { Jutsu } from "./Jutsu";
 const importEnum = (e: any, value: string | number | undefined, def: any) => {
   if (value === undefined) {
     return def;
-  } else if (isNaN(parseInt(String(value)))) {
+  } else if (isNaN(parseInt(String(value), 10))) {
     return e[value];
   } else {
     return value;
@@ -244,7 +244,16 @@ export class CharacterSheetModel {
       Math.floor(this.proficiencyBonus / 2)
     );
   }
-  public initiative: number;
+  public get initiative(): number {
+    if (
+      this.class === EClass["Hunter-Nin"] ||
+      (this.class as any) === "Hunter-Nin"
+    ) {
+      return this.dexterityDice + this.proficiencyBonus;
+    } else {
+      return this.dexterityDice + Math.floor(this.proficiencyBonus / 2);
+    }
+  }
   public get speed(): number {
     return this.characterClan.speed;
   }
@@ -401,7 +410,6 @@ export class CharacterSheetModel {
       ? data.equipment.map((x) => new Equipment(x))
       : [];
 
-    this.initiative = data.initiative ?? 0;
     this.hitPointsMax = data.hitPointsMax ?? 0;
     this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
     this.chakraPointsMax = data.chakraPointsMax ?? 0;

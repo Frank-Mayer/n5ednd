@@ -33,7 +33,7 @@ import { Yoton } from "./Yoton";
 import { Yuki } from "./Yuki";
 
 export const from = (ident: EClan | number | string): new () => IClan => {
-  const identNum = Number.parseInt(String(ident));
+  const identNum = Number.parseInt(String(ident), 10);
   if (!Number.isNaN(identNum)) {
     ident = identNum;
   }

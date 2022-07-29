@@ -5,7 +5,7 @@ import { HunterNin } from "./HunterNin";
 import { ScoutNin } from "./ScoutNin";
 
 export const from = (ident: EClass | number | string): new () => IClass => {
-  const identNum = Number.parseInt(String(ident));
+  const identNum = Number.parseInt(String(ident), 10);
   if (!Number.isNaN(identNum)) {
     ident = identNum;
   }
