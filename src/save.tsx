@@ -56,7 +56,7 @@ const save = async () => {
     data.characterSheet.name,
     EClan[data.characterSheet.clan],
     EClass[data.characterSheet.class],
-    `Lv${data.characterSheet.level}.${ext}`,
+    `Lv${data.characterSheet._level}.${ext}`,
   ].join(" ");
   a.click();
   URL.revokeObjectURL(url);
