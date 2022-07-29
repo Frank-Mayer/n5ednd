@@ -1,0 +1,13 @@
+@use "color";
+
+footer {
+  background-color: rgba(color.$background, 0.75);
+  backdrop-filter: blur(10px);
+  color: color.$foreground;
+  border-radius: 1rem;
+  padding: 1rem;
+
+  svg {
+    fill: deeppink;
+  }
+}

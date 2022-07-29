@@ -4,6 +4,7 @@ import { Download, SavedStatus, Upload } from "./save";
 import { Page01 } from "./view/Page01";
 import { Page02 } from "./view/Page02";
 import { Page03 } from "./view/Page03";
+import { Footer } from "./Footer";
 
 const rootEl = document.getElementById("root");
 
@@ -12,7 +13,7 @@ if (!rootEl) {
 }
 
 ReactDOM.createRoot(rootEl!).render(
-  <React.StrictMode>
+  <>
     <div id="toolbar">
       <SavedStatus />
       <Upload />
@@ -21,5 +22,6 @@ ReactDOM.createRoot(rootEl!).render(
     <Page01 />
     <Page02 />
     <Page03 />
-  </React.StrictMode>
+    <Footer />
+  </>
 );
