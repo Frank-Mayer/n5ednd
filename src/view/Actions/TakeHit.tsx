@@ -18,7 +18,9 @@ export const TakeHit = () => (
         notifyPropertyChanged();
         if (cs.hitPointsCurrent <= 0) {
           alert("You died!");
-        } else if (cs.hitPointsCurrent <= cs.hitPointsMax / 10) {
+        } else if (
+          cs.hitPointsCurrent <= Math.max(4, Math.ceil(cs.hitPointsMax / 10))
+        ) {
           const lsm = lifeSustainingMeasures();
           if (lsm) {
             alert(lsmMessage + `\n${lsm.name}: ${lsm.count} available`);
