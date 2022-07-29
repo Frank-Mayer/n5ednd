@@ -298,6 +298,19 @@ input {
   background-color: transparent;
 }
 
+input[type="checkbox"] {
+  &:checked {
+    background-image: radial-gradient(circle, lightgreen 0%, transparent 100%);
+  }
+  &:not(:checked) {
+    background-image: radial-gradient(
+      circle,
+      color.$foreground 0%,
+      transparent 100%
+    );
+  }
+}
+
 select {
   option:checked {
     display: none;
