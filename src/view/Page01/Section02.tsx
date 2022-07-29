@@ -18,7 +18,7 @@ export const Section02 = () => (
     <EnumView style="underline" enum={EClass} index="class" />
     <PrimitiveView style="underline" index="level" />
     <EnumView style="underline" enum={EBackground} index="background" />
-    <PrimitiveView style="underline" index="rank" />
+    <PrimitiveView style="underline" index="rank" readonly />
     <PrimitiveView style="underline" index="xp" />
   </section>
 );

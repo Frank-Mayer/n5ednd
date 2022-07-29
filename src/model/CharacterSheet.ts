@@ -69,7 +69,21 @@ export class CharacterSheetModel {
   public playerName: string;
   public level: number;
   public background: EBackground;
-  public rank: number;
+  public get rank(): string {
+    if (this.level < 5) {
+      return "D";
+    }
+    if (this.level < 9) {
+      return "C";
+    }
+    if (this.level < 13) {
+      return "B";
+    }
+    if (this.level < 17) {
+      return "A";
+    }
+    return "S";
+  }
   public xp: number;
   //#endregion
 
@@ -379,7 +393,6 @@ export class CharacterSheetModel {
       data.background,
       EBackground["Trouble Maker"]
     );
-    this.rank = data.rank ?? 1;
     this.xp = data.xp ?? 0;
 
     this.strength = data.strength ?? 10;
