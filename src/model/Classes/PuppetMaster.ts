@@ -2,10 +2,10 @@ import type { IClass } from "./IClass";
 import { EClass } from "./EClass";
 import { defaultProficiencyBonus } from "./defaultProficiencyBonus";
 
-export class GenjutsuSpecialist implements IClass {
-  public readonly ident = EClass["Genjutsu Specialist"];
-  hitDice: Dice = 6;
-  chakraDice: Dice = 12;
+export class PuppetMaster implements IClass {
+  public readonly ident = EClass["Scout-Nin"];
+  hitDice: Dice = 8;
+  chakraDice: Dice = 10;
   public proficiencyBonus(level: number) {
     return defaultProficiencyBonus(level);
   }

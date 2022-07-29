@@ -261,8 +261,12 @@ export class CharacterSheetModel {
   public hitPointsCurrent: number;
   public chakraPointsMax: number;
   public chakraPointsCurrent: number;
-  public hitDie: number;
-  public chakraDie: number;
+  public get hitDice(): number {
+    return this.characterClass.hitDice;
+  }
+  public get chakraDice(): number {
+    return this.characterClass.chakraDice;
+  }
   //#endregion
 
   //#region page 1 section 5

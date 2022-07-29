@@ -4,6 +4,8 @@ import { defaultProficiencyBonus } from "./defaultProficiencyBonus";
 
 export class ScoutNin implements IClass {
   public readonly ident = EClass["Scout-Nin"];
+  hitDice: Dice = 8;
+  chakraDice: Dice = 10;
   public proficiencyBonus(level: number) {
     return defaultProficiencyBonus(level);
   }
