@@ -39,7 +39,7 @@ export const compress = async (data: object) => {
 
     return {
       blob: new Blob([compressed], { type: "application/gzip" }),
-      ext: "gz",
+      ext: "json.gz",
     };
   } else {
     return {
