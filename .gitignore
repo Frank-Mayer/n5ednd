@@ -120,6 +120,10 @@ dist
 .vs
 .vscode-test
 
+# Fleet
+.fleet
+.idea
+
 # yarn v2
 .yarn
 .pnp.*
