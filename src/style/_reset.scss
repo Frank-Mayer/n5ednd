@@ -11,21 +11,6 @@
   overflow: hidden;
 }
 
-input,
-input::after,
-input::before,
-textarea,
-textarea::after,
-textarea::before,
-select,
-select::after,
-select::before {
-  border: none;
-  border-radius: 0;
-  outline: none;
-  filter: none;
-}
-
 * {
   -moz-appearance: none;
   -webkit-appearance: none;

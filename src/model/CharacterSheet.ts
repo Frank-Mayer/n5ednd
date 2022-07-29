@@ -8,6 +8,7 @@ import * as Clans from "./Clans/index";
 import { Equipment } from "./Equipment";
 import { Proficiency } from "./Proficiency";
 import { Item } from "./Item";
+import { Jutsu } from "./Jutsu";
 
 const importEnum = (e: any, value: string | number | undefined, def: any) => {
   if (value === undefined) {
@@ -298,6 +299,28 @@ export class CharacterSheetModel {
   public backstory: string;
   //#endregion
 
+  //#region page 3 section 1
+  public get ninjutsuAttackBonus(): number {
+    return this.proficiencyBonus + this.intelligenceDice;
+  }
+  public get ninjutsuSaveDC(): number {
+    return 8 + this.proficiencyBonus + this.intelligenceDice;
+  }
+  public get taijutsuAttackBonus(): number {
+    return this.proficiencyBonus + this.strengthDice;
+  }
+  public get taijutsuSaveDC(): number {
+    return 8 + this.proficiencyBonus + this.strengthDice;
+  }
+  public get genjutsuAttackBonus(): number {
+    return this.proficiencyBonus + this.wisdomDice;
+  }
+  public get genjutsuSaveDC(): number {
+    return 8 + this.proficiencyBonus + this.wisdomDice;
+  }
+  public jutsuList: Array<Jutsu>;
+  //#endregion
+
   constructor(data: Partial<CharacterSheetModel>) {
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
@@ -408,5 +431,9 @@ export class CharacterSheetModel {
     this.natureAffinities = data.natureAffinities ?? [];
 
     this.backstory = data.backstory ?? "";
+
+    this.jutsuList = data.jutsuList
+      ? data.jutsuList.map((x) => new Jutsu(x))
+      : [];
   }
 }

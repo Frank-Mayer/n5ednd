@@ -1,0 +1,155 @@
+@use "additionalStyles";
+@use "color";
+
+.p03 {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr;
+  gap: #{additionalStyles.$gap * 2};
+  grid-auto-flow: row;
+  grid-template-areas:
+    "s01"
+    "s02";
+  grid-column-gap: additionalStyles.$gap;
+  grid-row-gap: additionalStyles.$gap;
+
+  > * {
+    width: 100%;
+    height: 100%;
+
+    &.s01 {
+      grid-area: s01;
+
+      @include additionalStyles.border;
+
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: additionalStyles.$gap;
+      grid-template-areas:
+        "nab tab gab"
+        "nsdc tsdc gsdc";
+
+      > label {
+        height: 100%;
+        width: 100%;
+
+        &:nth-child(1) {
+          grid-area: nab;
+        }
+
+        &:nth-child(2) {
+          grid-area: tab;
+        }
+
+        &:nth-child(3) {
+          grid-area: gab;
+        }
+
+        &:nth-child(4) {
+          grid-area: nsdc;
+        }
+
+        &:nth-child(5) {
+          grid-area: tsdc;
+        }
+
+        &:nth-child(6) {
+          grid-area: gsdc;
+        }
+      }
+    }
+
+    &.s02 {
+      grid-area: s02;
+
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-rows: auto 1fr;
+      gap: additionalStyles.$gap;
+      grid-template-areas:
+        "label"
+        "jutsuList";
+
+      > * {
+        height: 100%;
+        width: 100%;
+      }
+
+      > .ListView {
+        grid-area: jutsuList;
+
+        display: flex !important;
+        gap: additionalStyles.$gap;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        align-content: stretch;
+        align-items: stretch;
+
+        > li {
+          &.add {
+            height: fit-content !important;
+            @include additionalStyles.border;
+          }
+          &:not(.add) {
+            @include additionalStyles.border;
+            height: calc(var(--font-size-big) * 4) !important;
+            display: grid;
+            grid-template-columns: auto 3fr 1fr 1fr;
+            grid-template-rows: auto 1fr;
+            gap: additionalStyles.$gap;
+            grid-template-areas:
+              "remove name rank chakra"
+              "remove description description description";
+
+            > .remove {
+              grid-area: remove;
+            }
+
+            > select {
+              grid-area: rank;
+            }
+
+            > .name,
+            > .chakraCost {
+              width: 100%;
+              height: 100%;
+              display: grid;
+              grid-auto-flow: column;
+              grid-auto-columns: auto 1fr;
+              gap: 0.5em;
+
+              > span:first-child {
+                color: rgba(color.$foreground, 0.5);
+              }
+            }
+
+            > .name {
+              grid-area: name;
+            }
+
+            > .chakraCost {
+              grid-area: chakra;
+            }
+
+            > textarea {
+              grid-area: description;
+              width: 100%;
+              height: 100%;
+              resize: none;
+              overflow-y: auto;
+              background-color: transparent;
+            }
+          }
+        }
+      }
+
+      > span {
+        grid-area: label;
+        color: rgba(color.$foreground, 0.5);
+        text-align: center;
+      }
+    }
+  }
+}

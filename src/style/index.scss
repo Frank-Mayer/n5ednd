@@ -4,6 +4,7 @@
 @import "input";
 @import "page01";
 @import "page02";
+@import "page03";
 @import "scrollbar";
 
 $max-page-width: 800px;
@@ -129,11 +130,6 @@ div#root {
     margin: 0 auto;
     border-radius: 1rem;
     backdrop-filter: blur(10px);
-
-    input,
-    select {
-      background-color: transparent;
-    }
   }
 }
 

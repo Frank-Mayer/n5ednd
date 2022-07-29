@@ -6,7 +6,6 @@
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto 1fr 2fr;
   gap: additionalStyles.$gap;
-  grid-auto-flow: row;
   grid-template-areas:
     "s01 s01 s01"
     "s02 s03 s03"
@@ -31,6 +30,11 @@
       grid-template-areas:
         "name age height weight"
         "villageRank eyes skin hair";
+
+      > * {
+        height: 100%;
+        width: 100%;
+      }
 
       > :nth-child(1) {
         grid-area: name;

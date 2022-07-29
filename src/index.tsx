@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import { Download, SavedStatus, Upload } from "./save";
 import { Page01 } from "./view/Page01";
 import { Page02 } from "./view/Page02";
+import { Page03 } from "./view/Page03";
 
 const rootEl = document.getElementById("root");
 
@@ -19,5 +20,6 @@ ReactDOM.createRoot(rootEl!).render(
     </div>
     <Page01 />
     <Page02 />
+    <Page03 />
   </React.StrictMode>
 );
