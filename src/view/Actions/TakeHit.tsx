@@ -14,7 +14,10 @@ export const TakeHit = () => (
       if (damageStr) {
         const damage = Number.parseInt(damageStr, 10);
         const cs = getCharacterSheetData();
-        cs.hitPointsCurrent = Math.max(0, cs.hitPointsCurrent - damage);
+        cs.hitPointsCurrent = Math.min(
+          cs.hitPointsMax,
+          Math.max(0, cs.hitPointsCurrent - damage)
+        );
         notifyPropertyChanged();
         if (cs.hitPointsCurrent <= 0) {
           alert("You died!");
