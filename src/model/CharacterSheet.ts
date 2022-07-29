@@ -257,14 +257,42 @@ export class CharacterSheetModel {
   public get speed(): number {
     return this.characterClan.speed;
   }
-  public hitPointsMax: number;
+  public _hitPointsMax: number;
+  public get hitPointsMax(): number {
+    if (this.level === 1) {
+      return this.constitutionDice + this.hitDice;
+    } else {
+      return this._hitPointsMax;
+    }
+  }
+  public set hitPointsMax(value: number) {
+    if (this.level === 1) {
+      this._hitPointsMax = this.constitutionDice + this.hitDice;
+    } else {
+      this._hitPointsMax = value;
+    }
+  }
   public hitPointsCurrent: number;
-  public chakraPointsMax: number;
+  public _chakraPointsMax: number;
+  public get chakraPointsMax(): number {
+    if (this.level === 1) {
+      return this.chakraDice + this.constitutionDice;
+    } else {
+      return this._chakraPointsMax;
+    }
+  }
+  public set chakraPointsMax(value: number) {
+    if (this.level === 1) {
+      this._chakraPointsMax = this.chakraDice + this.constitutionDice;
+    } else {
+      this._chakraPointsMax = value;
+    }
+  }
   public chakraPointsCurrent: number;
-  public get hitDice(): number {
+  public get hitDice(): Dice {
     return this.characterClass.hitDice;
   }
-  public get chakraDice(): number {
+  public get chakraDice(): Dice {
     return this.characterClass.chakraDice;
   }
   //#endregion
@@ -414,12 +442,12 @@ export class CharacterSheetModel {
       ? data.equipment.map((x) => new Equipment(x))
       : [];
 
-    this.hitPointsMax = data.hitPointsMax ?? 0;
+    this.hitPointsMax = data._hitPointsMax ?? 0;
+    this._hitPointsMax ??= this.hitPointsMax;
     this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
-    this.chakraPointsMax = data.chakraPointsMax ?? 0;
+    this.chakraPointsMax = data._chakraPointsMax ?? 0;
+    this._chakraPointsMax ??= this.chakraPointsMax;
     this.chakraPointsCurrent = data.chakraPointsCurrent ?? 0;
-    this.hitDie = data.hitDie ?? 0;
-    this.chakraDie = data.chakraDie ?? 0;
 
     this.personalityTraits = data.personalityTraits ?? "";
     this.ideals = data.ideals ?? "";
