@@ -12,7 +12,7 @@ export const Section02 = () => (
         const name = prompt("Name of the Jutsu");
         if (name === null) return;
 
-        const chakraCost = Number.parseInt(prompt("Chakra Cost") ?? "",10);
+        const chakraCost = Number.parseInt(prompt("Chakra Cost") ?? "", 10);
         if (Number.isNaN(chakraCost)) return;
 
         const description = prompt("Description of the Jutsu");
@@ -31,6 +31,18 @@ export const Section02 = () => (
               value={item.name}
               onChange={(ev) => {
                 item.name = ev.target.value;
+                notifyPropertyChanged();
+              }}
+            />
+          </label>
+          <label className="castTime">
+            <span>Cast Time:</span>
+            <input
+              key={key + ".castTime"}
+              type="text"
+              value={item.castTime}
+              onChange={(ev) => {
+                item.castTime = ev.target.value;
                 notifyPropertyChanged();
               }}
             />
