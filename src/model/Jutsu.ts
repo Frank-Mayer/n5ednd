@@ -10,6 +10,6 @@ export class Jutsu {
     this.description = data.description ?? "no description";
     this.chakraCost = data.chakraCost ?? 0;
     this.rank = data.rank ?? "E";
-    this.castTime = data.castTime ?? "";
+    this.castTime = data.castTime ?? "1 Action";
   }
 }
