@@ -2,6 +2,8 @@
 
 [![CI/CD](https://github.com/Frank-Mayer/n5ednd/actions/workflows/firebase-hosting-merge.yml/badge.svg)](https://github.com/Frank-Mayer/n5ednd/actions/workflows/firebase-hosting-merge.yml)
 
+![CodeQL](https://github.com/Frank-Mayer/n5ednd/actions/workflows/codeql-analysis.yml/badge.svg)
+
 ### Project Scripts
 
 - `dev` start development server
