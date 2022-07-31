@@ -18,16 +18,16 @@ $max-page-width: 800px;
   padding: 1rem;
   background: {
     color: color.$background;
-    image: url(../img/background.webp);
-    size: cover;
+    image: url(../img/shuriken.svg);
+    size: 64px;
     position: center;
-    repeat: no-repeat;
+    repeat: repeat;
     attachment: fixed;
   }
   color: color.$foreground;
 }
 
-div#root > input {
+div#root > input[type="file"] {
   background-color: rgba(color.$background, 0.5);
 }
 
@@ -81,10 +81,13 @@ div#root {
   // pages
   > div {
     &#toolbar {
-      background-color: rgba(color.$foreground, 0.75);
+      position: fixed;
+      z-index: 1;
+      top: 1rem;
       display: flex;
       flex-direction: row;
-      align-items: center;
+      flex-wrap: wrap;
+      align-items: flex-start;
       justify-content: space-evenly;
       padding: var(--font-size-small) var(--font-size-big);
       gap: var(--font-size-regular);
@@ -122,7 +125,6 @@ div#root {
       }
     }
     &:not(#toolbar) {
-      background-color: rgba(color.$background, 0.75);
       width: calc(100vw - 4rem);
       min-height: calc(var(--page-width) / 210 * 297);
     }
@@ -130,7 +132,30 @@ div#root {
     max-width: $max-page-width;
     margin: 0 auto;
     border-radius: 1rem;
+  }
+}
+
+// supports backdrop blur
+@supports (backdrop-filter: blur(10px)) {
+  #root > div {
     backdrop-filter: blur(10px);
+    &#toolbar {
+      background-color: rgba(color.$foreground, 0.75);
+    }
+    &:not(#toolbar) {
+      background-color: rgba(color.$background, 0.75);
+    }
+  }
+}
+// else
+@supports not (backdrop-filter: blur(10px)) {
+  #root > div {
+    &#toolbar {
+      background-color: color.$foreground;
+    }
+    &:not(#toolbar) {
+      background-color: color.$background;
+    }
   }
 }
 
