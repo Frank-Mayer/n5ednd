@@ -12,7 +12,7 @@
 
 ### Software
 
-Package Manager: [yarn](https://yarnpkg.com)
+Package Manager: npm (default)
 
 Frontend Framework: [React](https://reactjs.org)
 

@@ -29,11 +29,10 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Node
+      - name: Setup Node
         uses: actions/setup-node@v3
         with:
           node-version: latest
-          cache: yarn
 
       # Initializes the CodeQL tools for scanning.
       - name: Initialize CodeQL
@@ -47,10 +46,10 @@ jobs:
           # Details on CodeQL's query packs refer to : https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/configuring-code-scanning#using-queries-in-ql-packs
           # queries: security-extended,security-and-quality
       - name: Install Dependencies
-        run: yarn
+        run: npm i
 
       - name: Build
-        run: yarn build
+        run: npm run build
 
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v2
