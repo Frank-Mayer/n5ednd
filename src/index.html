@@ -16,7 +16,7 @@
     <script defer async src="./index.tsx"></script>
     <link rel="stylesheet" href="./style/index.scss" />
     <script>
-      if ("serviceWorker" in navigator) {
+      if ("serviceWorker" in navigator && location.protocol === "https:") {
         navigator.serviceWorker.register("/service-worker.ts");
       }
     </script>
