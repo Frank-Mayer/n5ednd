@@ -1,6 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Hyuga extends IClan {
-  override ident: EClan = EClan.Hyuga;
+export class Hyuga implements IClan {
+  speed: number = 30;
+  ident: EClan = EClan.Hyuga;
 }

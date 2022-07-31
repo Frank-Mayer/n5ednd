@@ -1,6 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Yoton extends IClan {
-  override ident: EClan = EClan.Yoton;
+export class Yoton implements IClan {
+  speed: number = 30;
+  ident: EClan = EClan.Yoton;
 }

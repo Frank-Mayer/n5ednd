@@ -1,6 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Sarutobi extends IClan {
-  override ident: EClan = EClan.Sarutobi;
+export class Sarutobi implements IClan {
+  speed: number = 30;
+  ident: EClan = EClan.Sarutobi;
 }

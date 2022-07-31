@@ -1,6 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Yamanaka extends IClan {
-  override ident: EClan = EClan.Yamanaka;
+export class Yamanaka implements IClan {
+  speed: number = 30;
+  ident: EClan = EClan.Yamanaka;
 }

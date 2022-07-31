@@ -1,7 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Namikaze extends IClan {
-  override speed: number = 35;
-  override ident: EClan = EClan.Namikaze;
+export class Namikaze implements IClan {
+  speed: number = 35;
+  ident: EClan = EClan.Namikaze;
 }

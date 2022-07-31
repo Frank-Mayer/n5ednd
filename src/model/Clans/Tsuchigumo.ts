@@ -1,7 +1,7 @@
 import { EClan } from "./EClan";
 import { IClan } from "./IClan";
 
-export class Tsuchigumo extends IClan {
-  override speed: number = 35;
-  override ident: EClan = EClan.Tsuchigumo;
+export class Tsuchigumo implements IClan {
+  speed: number = 35;
+  ident: EClan = EClan.Tsuchigumo;
 }
