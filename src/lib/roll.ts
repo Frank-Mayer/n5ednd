@@ -1,4 +1,5 @@
 import { getPreferencesData } from "../data/PreferencesData";
+import { getStatisticsData } from "../data/StatisticsData";
 
 const manualRoll = <D extends Dice, R extends RollResult[D] = RollResult[D]>(
   dice: D
@@ -15,6 +16,7 @@ const manualRoll = <D extends Dice, R extends RollResult[D] = RollResult[D]>(
         if (result < 1 || result > dice || result % 1 !== 0) {
           reject(`Invalid input: "${result}"`);
         } else {
+          getStatisticsData().addThrow(dice, result);
           resolve(result as R);
         }
       }
@@ -27,6 +29,7 @@ const cpuRoll = <D extends Dice, R extends RollResult[D] = RollResult[D]>(
   new Promise((resolve) => {
     const r = Math.round(Math.random() * (dice - 1) + 1) as R;
     alert(`D${dice} roll: ${r}`);
+    getStatisticsData().addThrow(dice, r);
     resolve(r);
   });
 

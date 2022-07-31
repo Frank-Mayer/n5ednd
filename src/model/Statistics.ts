@@ -20,4 +20,29 @@ export class StatisticsModel {
     this.d12Throws = data.d12Throws ?? [];
     this.d20Throws = data.d20Throws ?? [];
   }
+
+  public addThrow(dice: Dice, throwResult: number) {
+    switch (dice) {
+      case 4:
+        this.d4Throws.push(throwResult);
+        break;
+      case 6:
+        this.d6Throws.push(throwResult);
+        break;
+      case 8:
+        this.d8Throws.push(throwResult);
+        break;
+      case 10:
+        this.d10Throws.push(throwResult);
+        break;
+      case 12:
+        this.d12Throws.push(throwResult);
+        break;
+      case 20:
+        this.d20Throws.push(throwResult);
+        break;
+    }
+
+    window.postMessage({ type: "property-changed" }, "*");
+  }
 }
