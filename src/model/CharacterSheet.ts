@@ -9,6 +9,7 @@ import { Equipment } from "./Equipment";
 import { Proficiency } from "./Proficiency";
 import { Item } from "./Item";
 import { Jutsu } from "./Jutsu";
+import { FamiliarSpirit } from "./FamiliarSpirit";
 
 const levelToExp = (level: number): number => {
   switch (level) {
@@ -457,6 +458,10 @@ export class CharacterSheetModel {
   public jutsuList: Array<Jutsu>;
   //#endregion
 
+  //#region page 4
+  public familiarSpirits: Array<FamiliarSpirit>;
+  //#endregion
+
   constructor(data: Partial<CharacterSheetModel>) {
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
@@ -568,6 +573,10 @@ export class CharacterSheetModel {
 
     this.jutsuList = data.jutsuList
       ? data.jutsuList.map((x) => new Jutsu(x))
+      : [];
+
+    this.familiarSpirits = data.familiarSpirits
+      ? data.familiarSpirits.map((x) => new FamiliarSpirit(x))
       : [];
   }
 }

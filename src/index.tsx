@@ -4,6 +4,7 @@ import { Toolbar } from "./view/Toolbar";
 import { Page01 } from "./view/Page01";
 import { Page02 } from "./view/Page02";
 import { Page03 } from "./view/Page03";
+import { Page04 } from "./view/Page04";
 import { Footer } from "./Footer";
 
 const rootEl = document.getElementById("root");
@@ -18,6 +19,7 @@ ReactDOM.createRoot(rootEl!).render(
     <Page01 />
     <Page02 />
     <Page03 />
+    <Page04 />
     <Footer />
   </>
 );
