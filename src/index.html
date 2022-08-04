@@ -3,9 +3,13 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="shortcut icon" href="./img/favicon.svg" type="image/svg+xml" />
+    <link
+      rel="shortcut icon"
+      href="./view/img/favicon.svg"
+      type="image/svg+xml"
+    />
     <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="preload" href="./style/index.scss" as="style" />
+    <link rel="preload" href="./view/style/index.scss" as="style" />
     <kink rel="preload" href="./index.tsx" as="script" />
     <title>Naruto 5E D&D E-Character-Sheet</title>
   </head>
@@ -15,7 +19,7 @@
       <!-- Your react app will be rendered here -->
     </div>
     <script defer async src="./index.tsx"></script>
-    <link rel="stylesheet" href="./style/index.scss" />
+    <link rel="stylesheet" href="./view/style/index.scss" />
     <script>
       if ("serviceWorker" in navigator && location.protocol === "https:") {
         navigator.serviceWorker.register("/service-worker.ts");
