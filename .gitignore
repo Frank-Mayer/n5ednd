@@ -45,6 +45,7 @@ jspm_packages/
 # Lock files
 !package-lock.json
 yarl.lock
+bun.lockb
 
 # Snowpack dependency directory (https://snowpack.dev/)
 web_modules/
