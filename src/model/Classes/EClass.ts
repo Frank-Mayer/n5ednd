@@ -10,4 +10,5 @@ export enum EClass {
   "Puppet Master",
   "Cooking-Nin",
   "Science-Nin",
+  "FamiliarSpirit",
 }

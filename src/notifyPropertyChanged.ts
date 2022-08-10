@@ -1,5 +1,6 @@
 import type { CharacterSheetModel } from "./model/CharacterSheet";
 import { getCharacterSheetData } from "./data/CharacterSheetData";
+import { thisUrl } from "./lib/WindowManager";
 
 const dispatchMap = new Map<
   string,
@@ -19,7 +20,7 @@ export const notifyPropertyChanged = () => {
     }
   }
 
-  window.postMessage({ type: "property-changed" }, "*");
+  window.postMessage({ type: "property-changed" }, thisUrl.origin);
 };
 
 export const registerComponent = (

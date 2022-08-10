@@ -18,6 +18,7 @@ interface Props<
   children: (x: {
     item: ArrayElType<T>;
     key: string;
+    index: number;
     setValue: (x: ArrayElType<T>) => void;
   }) => React.ReactNode;
   add?: (arr: T) => void;
@@ -73,6 +74,7 @@ export const ListView = <
                 {props.children({
                   item,
                   key,
+                  index: i,
                   setValue: (x: ArrayElType<T>) => {
                     (getCharacterSheetData()[props.index] as T)[i] = x;
                   },
@@ -121,6 +123,7 @@ export const ListView = <
               {props.children({
                 item,
                 key,
+                index: i,
                 setValue: (x: ArrayElType<T>) => {
                   (getCharacterSheetData()[props.index] as T)[i] = x;
                 },
@@ -135,11 +138,6 @@ export const ListView = <
             key={`${props.index}.__add__`}
             onClick={() => {
               props.add!(getCharacterSheetData()[props.index] as T);
-              console.debug(
-                "add to",
-                props.index,
-                getCharacterSheetData()[props.index]
-              );
               notifyPropertyChanged();
             }}
           >

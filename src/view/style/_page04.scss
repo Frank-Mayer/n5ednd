@@ -1,0 +1,24 @@
+@use "additionalStyles";
+@use "color";
+
+.p04 {
+  .ListView {
+    > li {
+      height: calc(var(--font-size-big) + var(--font-size-regular)) !important;
+
+      > input {
+        width: calc(
+          100% - var(--font-size-big) - (var(--font-size-regular) * 3)
+        );
+      }
+
+      > .button {
+        cursor: pointer !important;
+        > svg {
+          width: var(--font-size-big);
+          height: var(--font-size-big);
+        }
+      }
+    }
+  }
+}

@@ -19,6 +19,13 @@ import {
 } from "react-bootstrap-icons";
 import { compress, compressionSupported, decompress } from "./lib/compress";
 import { StatisticsModel } from "./model/Statistics";
+import {
+  isSubwindow,
+  messageToParent,
+  onMessageFromChildren,
+  Signal,
+  subwindowDataForUpdateParent,
+} from "./lib/WindowManager";
 
 let savedStateDispatch:
   | React.Dispatch<React.SetStateAction<boolean>>
@@ -171,40 +178,71 @@ dbProm.then((db) => {
       if (ev.data.type === "property-changed") {
         setSavedStatus(false);
 
-        if (typeof storeTimeout !== "undefined") {
-          clearTimeout(storeTimeout);
-          storeTimeout = undefined;
-        }
-
-        storeTimeout = window.setTimeout(() => {
-          storeTimeout = undefined;
-          db.transaction(characterSheetObjectStore, "readwrite");
-          db.put(
-            characterSheetObjectStore,
-            getCharacterSheetData().toJSON(),
-            characterSheetKey
-          )
-            .then(() => {
+        if (isSubwindow) {
+          messageToParent({
+            data: {
+              type: "property-changed",
+              ...subwindowDataForUpdateParent,
+              data: getCharacterSheetData().toJSON(),
+            },
+          }).then((x) => {
+            if (x) {
               setSavedStatus(true);
-            })
-            .catch((err) => {
+            } else {
+              alert(x);
+            }
+          });
+        } else {
+          if (typeof storeTimeout !== "undefined") {
+            clearTimeout(storeTimeout);
+            storeTimeout = undefined;
+          }
+
+          storeTimeout = window.setTimeout(() => {
+            storeTimeout = undefined;
+            db.transaction(characterSheetObjectStore, "readwrite");
+            db.put(
+              characterSheetObjectStore,
+              getCharacterSheetData(true).toJSON(),
+              characterSheetKey
+            )
+              .then(() => {
+                setSavedStatus(true);
+              })
+              .catch((err) => {
+                console.error(err);
+                alert(err);
+              });
+
+            db.put(
+              characterSheetObjectStore,
+              getStatisticsData().toJSON(),
+              statisticsKey
+            ).catch((err) => {
               console.error(err);
               alert(err);
             });
-
-          db.put(
-            characterSheetObjectStore,
-            getStatisticsData().toJSON(),
-            statisticsKey
-          ).catch((err) => {
-            console.error(err);
-            alert(err);
-          });
-        }, 3000);
+          }, 3000);
+        }
       }
     },
     { passive: true }
   );
+
+  onMessageFromChildren((msg) => {
+    if (
+      msg.type === "property-changed" &&
+      typeof msg.index == "number" &&
+      msg.prop &&
+      msg.data
+    ) {
+      (getCharacterSheetData() as any)[msg.prop][msg.index] =
+        new CharacterSheetModel(msg.data);
+      notifyPropertyChanged();
+      return Signal.on("ok");
+    }
+    return Signal.off();
+  });
 });
 
 export {};

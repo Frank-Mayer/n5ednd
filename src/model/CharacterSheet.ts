@@ -99,7 +99,12 @@ export class CharacterSheetModel {
 
   //#region tool methods
   public toJSON(): this {
-    return { ...this, clan: this.clan, class: this.class };
+    return {
+      ...this,
+      clan: this.clan,
+      class: this.class,
+      familiarSpirits: this.familiarSpirits.map((x) => x.toJSON()),
+    };
   }
   //#endregion
 
@@ -457,6 +462,10 @@ export class CharacterSheetModel {
   public jutsuList: Array<Jutsu>;
   //#endregion
 
+  //#region additional features
+  public familiarSpirits: Array<CharacterSheetModel>;
+  //#endregion
+
   constructor(data: Partial<CharacterSheetModel>) {
     this.passivePerception = data.passivePerception ?? 0;
     this.passiveInsight = data.passiveInsight ?? 0;
@@ -568,6 +577,10 @@ export class CharacterSheetModel {
 
     this.jutsuList = data.jutsuList
       ? data.jutsuList.map((x) => new Jutsu(x))
+      : [];
+
+    this.familiarSpirits = data.familiarSpirits
+      ? data.familiarSpirits.map((x) => new CharacterSheetModel(x))
       : [];
   }
 }

@@ -1,3 +1,5 @@
+import { thisUrl } from "../lib/WindowManager";
+
 export class StatisticsModel {
   //#region tool methods
   public toJSON(): this {
@@ -43,6 +45,6 @@ export class StatisticsModel {
         break;
     }
 
-    window.postMessage({ type: "property-changed" }, "*");
+    window.postMessage({ type: "property-changed" }, thisUrl.origin);
   }
 }

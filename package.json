@@ -2,7 +2,7 @@
   "name": "n5ednd",
   "packageManager": "yarn@3.2.2",
   "scripts": {
-    "dev": "parcel \"src/index.html\" --open",
+    "dev": "parcel src/index.html --open",
     "build": "parcel build \"src/index.html\" --no-source-maps --public-url \"https://n5ednd.web.app\" --no-cache",
     "clean": "npm run clean-windows || npm run clean-linux",
     "clean-linux": "rm -rf \"./.cache\" && rm -rf \"./dist\"",

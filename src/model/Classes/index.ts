@@ -11,6 +11,7 @@ import { PuppetMaster } from "./PuppetMaster";
 import { ScienceNin } from "./ScienceNin";
 import { TaijutsuSpecialist } from "./TaijutsuSpecialist";
 import { WeaponSpecialist } from "./WeaponSpecialist";
+import { FamiliarSpirit } from "./FamiliarSpirit";
 
 export const from = (ident: EClass | number | string): new () => IClass => {
   const identNum = Number.parseInt(String(ident), 10);
@@ -52,6 +53,9 @@ export const from = (ident: EClass | number | string): new () => IClass => {
     case EClass["Weapon Specialist"]:
     case "Weapon Specialist":
       return WeaponSpecialist;
+    case EClass.FamiliarSpirit:
+    case "FamiliarSpirit":
+      return FamiliarSpirit;
     default:
       throw new Error(`Unknown class: <${typeof ident}>${ident}`);
   }
