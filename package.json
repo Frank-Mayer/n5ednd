@@ -9,12 +9,12 @@
     "clean-windows": "rmdir /Q/S \"./.cache\" & rmdir /Q/S \"./dist\""
   },
   "devDependencies": {
-    "@types/react": "^18.0.15",
+    "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@types/react-numeric-input": "^2.2.4",
     "@types/service_worker_api": "^0.0.9",
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.54.0",
+    "sass": "^1.54.4",
     "typescript": "^4.7.4"
   },
   "dependencies": {
