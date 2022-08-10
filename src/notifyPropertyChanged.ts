@@ -1,6 +1,6 @@
 import type { CharacterSheetModel } from "./model/CharacterSheet";
 import { getCharacterSheetData } from "./data/CharacterSheetData";
-import { thisUrl } from "./lib/WindowManager";
+import { thisUrl, updateChildren } from "./lib/WindowManager";
 
 const dispatchMap = new Map<
   string,
@@ -10,7 +10,7 @@ const dispatchMap = new Map<
   }
 >();
 
-export const notifyPropertyChanged = () => {
+export const notifyPropertyChanged = (skipSave = false) => {
   for (const [, { key, dispatch }] of dispatchMap) {
     const val = getCharacterSheetData()[key];
     if (typeof val === "object") {
@@ -20,7 +20,9 @@ export const notifyPropertyChanged = () => {
     }
   }
 
-  window.postMessage({ type: "property-changed" }, thisUrl.origin);
+  if (!skipSave) {
+    window.postMessage({ type: "property-changed" }, thisUrl.origin);
+  }
 };
 
 export const registerComponent = (

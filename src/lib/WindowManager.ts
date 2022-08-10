@@ -102,9 +102,14 @@ export const openWindow = (...value: Array<[string, string | number]>) => {
   }
 };
 
-export const closeAllWindows = () => {
-  for (let i = window.length - 1; i >= 0; i--) {
-    window[i].close();
+export const updateChildren = () => {
+  for (let i = windows.length - 1; i >= 1; i--) {
+    windows[i].postMessage(
+      {
+        type: "property-changed-from-parent",
+      },
+      thisUrl.origin
+    );
   }
 };
 

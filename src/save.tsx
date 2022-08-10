@@ -25,6 +25,7 @@ import {
   onMessageFromChildren,
   Signal,
   subwindowDataForUpdateParent,
+  updateChildren,
 } from "./lib/WindowManager";
 
 let savedStateDispatch:
@@ -152,23 +153,27 @@ export const dbProm = openDB<CharacterSheetModel>("naruto", 1, {
 });
 
 dbProm.then((db) => {
-  db.get(characterSheetObjectStore, characterSheetKey)
-    .then((data) => {
-      if (data) {
-        setCharacterSheetData(data);
-        notifyPropertyChanged();
-      }
-    })
-    .catch(console.error);
+  const loadDataFromDb = () => {
+    db.get(characterSheetObjectStore, characterSheetKey)
+      .then((data) => {
+        if (data) {
+          setCharacterSheetData(data);
+          notifyPropertyChanged(true);
+        }
+      })
+      .catch(console.error);
 
-  db.get(characterSheetObjectStore, statisticsKey)
-    .then((data) => {
-      if (data) {
-        setStatisticsData(data);
-        notifyPropertyChanged();
-      }
-    })
-    .catch(console.error);
+    db.get(characterSheetObjectStore, statisticsKey)
+      .then((data) => {
+        if (data) {
+          setStatisticsData(data);
+          notifyPropertyChanged(true);
+        }
+      })
+      .catch(console.error);
+  };
+
+  loadDataFromDb();
 
   let storeTimeout: number | undefined;
 
@@ -201,29 +206,38 @@ dbProm.then((db) => {
           storeTimeout = window.setTimeout(() => {
             storeTimeout = undefined;
             db.transaction(characterSheetObjectStore, "readwrite");
-            db.put(
-              characterSheetObjectStore,
-              getCharacterSheetData(true).toJSON(),
-              characterSheetKey
-            )
-              .then(() => {
-                setSavedStatus(true);
-              })
-              .catch((err) => {
-                console.error(err);
-                alert(err);
-              });
+            Promise.all([
+              db
+                .put(
+                  characterSheetObjectStore,
+                  getCharacterSheetData(true).toJSON(),
+                  characterSheetKey
+                )
+                .then(() => {
+                  setSavedStatus(true);
+                })
+                .catch((err) => {
+                  console.error(err);
+                  alert(err);
+                }),
 
-            db.put(
-              characterSheetObjectStore,
-              getStatisticsData().toJSON(),
-              statisticsKey
-            ).catch((err) => {
-              console.error(err);
-              alert(err);
+              db
+                .put(
+                  characterSheetObjectStore,
+                  getStatisticsData().toJSON(),
+                  statisticsKey
+                )
+                .catch((err) => {
+                  console.error(err);
+                  alert(err);
+                }),
+            ]).then(() => {
+              updateChildren();
             });
           }, 3000);
         }
+      } else if (ev.data.type === "property-changed-from-parent") {
+        loadDataFromDb();
       }
     },
     { passive: true }
