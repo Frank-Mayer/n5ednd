@@ -20,8 +20,10 @@ export const Page04 = () => (
             new CharacterSheetModel({
               name: newName,
               playerName: cs.playerName,
+              _level: cs.level,
               level: cs.level,
-              _xp: cs._xp,
+              _xp: cs.xp,
+              xp: cs.xp,
               class: EClass.FamiliarSpirit,
               clan: EClan["Non-Clan"],
             })
