@@ -19,8 +19,10 @@ $max-page-width: 800px;
   padding: 1rem;
   background: {
     color: color.$background;
-    image: url(../img/shuriken.svg);
-    size: 64px;
+    image: url(../img/FlyingThunderGod.webp);
+    size: cover;
+    // image: url(../img/shuriken.svg);
+    // size: 64px;
     position: center;
     repeat: repeat;
     attachment: fixed;
@@ -70,14 +72,14 @@ select {
 
 div#root {
   padding: {
-    top: 10rem;
-    bottom: 16rem;
+    top: 16rem;
+    bottom: 32rem;
   }
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 1rem;
+  gap: 8rem;
 
   // pages
   > div {
