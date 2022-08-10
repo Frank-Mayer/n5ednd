@@ -1,4 +1,6 @@
 import React from "react";
+import { getCharacterSheetData } from "../../data/CharacterSheetData";
+import { thisUrl } from "../../lib/WindowManager";
 import { EBackground } from "../../model/Backgrounds/EBackground";
 import { EClan } from "../../model/Clans/EClan";
 import { EClass } from "../../model/Classes/EClass";
@@ -15,7 +17,12 @@ export const Section02 = () => (
     />
     <EnumView style="underline" enum={EClan} index="clan" />
     <PrimitiveView style="underline" index="playerName" />
-    <EnumView style="underline" enum={EClass} index="class" />
+    <EnumView
+      style="underline"
+      enum={EClass}
+      index="class"
+      readonly={thisUrl.searchParams.has("familiarSpirit")}
+    />
     <PrimitiveView style="underline" index="level" />
     <EnumView style="underline" enum={EBackground} index="background" />
     <PrimitiveView style="underline" index="rank" readonly />

@@ -104,6 +104,9 @@ export class CharacterSheetModel {
       clan: this.clan,
       class: this.class,
       familiarSpirits: this.familiarSpirits.map((x) => x.toJSON()),
+      speed: this.speed,
+      hitDice: this.hitDice,
+      chakraDice: this.chakraDice,
     };
   }
 
@@ -361,8 +364,16 @@ export class CharacterSheetModel {
       return this.dexterityDice + Math.floor(this.proficiencyBonus / 2);
     }
   }
+  public _speed: number;
   public get speed(): number {
-    return this.characterClan.speed;
+    return this.isFamiliarSpirit ? this._speed : this.characterClan.speed;
+  }
+  public set speed(value: number) {
+    if (this.isFamiliarSpirit) {
+      this._speed = value;
+    } else {
+      alert("You can't change your speed");
+    }
   }
   public _hitPointsMax: number;
   public get hitPointsMax(): number {
@@ -396,11 +407,31 @@ export class CharacterSheetModel {
     }
   }
   public chakraPointsCurrent: number;
+
+  public _hitDice: Dice;
   public get hitDice(): Dice {
-    return this.characterClass.hitDice;
+    return this.isFamiliarSpirit ? this._hitDice : this.characterClass.hitDice;
   }
+  public set hitDice(value: Dice) {
+    if (this.isFamiliarSpirit) {
+      this._hitDice = value;
+    } else {
+      alert("You can't change your hit dice");
+    }
+  }
+
+  public _chakraDice: Dice;
   public get chakraDice(): Dice {
-    return this.characterClass.chakraDice;
+    return this.isFamiliarSpirit
+      ? this._chakraDice
+      : this.characterClass.chakraDice;
+  }
+  public set chakraDice(value: Dice) {
+    if (this.isFamiliarSpirit) {
+      this._chakraDice = value;
+    } else {
+      alert("You can't change your chakra dice");
+    }
   }
   //#endregion
 
@@ -552,12 +583,15 @@ export class CharacterSheetModel {
       ? data.equipment.map((x) => new Equipment(x))
       : [];
 
+    this._speed = data.speed ?? 30;
     this.hitPointsMax = data._hitPointsMax ?? 0;
     this._hitPointsMax ??= this.hitPointsMax;
     this.hitPointsCurrent = data.hitPointsCurrent ?? 0;
     this.chakraPointsMax = data._chakraPointsMax ?? 0;
     this._chakraPointsMax ??= this.chakraPointsMax;
     this.chakraPointsCurrent = data.chakraPointsCurrent ?? 0;
+    this._hitDice = data.hitDice ?? 10;
+    this._chakraDice = data.chakraDice ?? 10;
 
     this.personalityTraits = data.personalityTraits ?? "";
     this.ideals = data.ideals ?? "";

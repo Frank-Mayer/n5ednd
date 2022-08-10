@@ -11,6 +11,7 @@ interface Props<K extends keyof CharacterSheetModel> {
   index: K;
   enum: any;
   label?: string;
+  readonly?: boolean;
   style: "left" | "right" | "underline" | "big" | "no-label";
 }
 
@@ -35,10 +36,12 @@ export const EnumView = <
         key={props.index}
         value={val}
         onChange={(ev) => {
-          const newValue = Number(ev.target.value);
-          if (newValue !== getCharacterSheetData()[props.index]) {
-            getCharacterSheetData()[props.index] = newValue as T;
-            notifyPropertyChanged();
+          if (!props.readonly) {
+            const newValue = Number(ev.target.value);
+            if (newValue !== getCharacterSheetData()[props.index]) {
+              getCharacterSheetData()[props.index] = newValue as T;
+              notifyPropertyChanged();
+            }
           }
         }}
       >

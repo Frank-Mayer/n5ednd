@@ -25,6 +25,8 @@ export const notifyPropertyChanged = (skipSave = false) => {
   }
 };
 
+(globalThis as any).notifyPropertyChanged = notifyPropertyChanged;
+
 export const registerComponent = (
   key: keyof CharacterSheetModel,
   dispatch: React.Dispatch<React.SetStateAction<any>>,
