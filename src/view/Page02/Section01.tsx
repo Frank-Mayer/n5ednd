@@ -1,4 +1,5 @@
 import React from "react";
+import { getCharacterSheetData } from "../../data/CharacterSheetData";
 import { PrimitiveView } from "../PrimitiveView";
 
 export const Section01 = () => (
@@ -14,7 +15,17 @@ export const Section01 = () => (
     <PrimitiveView style="underline" index="weight" />
     <PrimitiveView index="villageRank" style="underline" />
     <PrimitiveView style="underline" index="eyes" />
-    <PrimitiveView style="underline" index="skin" />
-    <PrimitiveView style="underline" index="hair" />
+    <PrimitiveView
+      style="underline"
+      index="skin"
+      label={getCharacterSheetData().isFamiliarSpirit ? "Species" : "Skin"}
+    />
+    <PrimitiveView
+      style="underline"
+      index="hair"
+      label={
+        getCharacterSheetData().isFamiliarSpirit ? "Fur/Sheds/Skin" : "Hair"
+      }
+    />
   </section>
 );

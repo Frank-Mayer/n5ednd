@@ -106,6 +106,13 @@ export class CharacterSheetModel {
       familiarSpirits: this.familiarSpirits.map((x) => x.toJSON()),
     };
   }
+
+  public get isFamiliarSpirit(): boolean {
+    return (
+      this.class === EClass.FamiliarSpirit ||
+      (this.class as any) === "FamiliarSpirit"
+    );
+  }
   //#endregion
 
   //#region page 1 section 1

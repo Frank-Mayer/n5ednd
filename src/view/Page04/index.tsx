@@ -3,6 +3,7 @@ import { BoxArrowUpRight } from "react-bootstrap-icons";
 import { getCharacterSheetData } from "../../data/CharacterSheetData";
 import { openWindow } from "../../lib/WindowManager";
 import { CharacterSheetModel } from "../../model/CharacterSheet";
+import { EClan } from "../../model/Clans/EClan";
 import { EClass } from "../../model/Classes/EClass";
 import { notifyPropertyChanged } from "../../notifyPropertyChanged";
 import { ListView } from "../ListView";
@@ -22,6 +23,7 @@ export const Page04 = () => (
               level: cs.level,
               _xp: cs._xp,
               class: EClass.FamiliarSpirit,
+              clan: EClan["Non-Clan"],
             })
           );
           notifyPropertyChanged();
