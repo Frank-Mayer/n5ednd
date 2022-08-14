@@ -123,9 +123,23 @@ export class CharacterSheetModel {
     return this.characterClass.proficiencyBonus(this.level);
   }
 
-  public passivePerception: number;
+  public get passivePerception() {
+    for (const proficiency of this.wisdomProficiencies){
+      if (proficiency.label == "Perception") {
+        return 10+ proficiency.value
+      }
+    }
+      return 10 + this.wisdomDice
+  }
 
-  public passiveInsight: number;
+  public get passiveInsight() {  
+    for (const proficiency of this.wisdomProficiencies){
+      if (proficiency.label == "Perception") {
+        return 10+ proficiency.value
+      }
+    }
+      return 10 + this.wisdomDice
+  }
   public willOfFire: number;
   //#endregion
 
@@ -505,8 +519,6 @@ export class CharacterSheetModel {
   //#endregion
 
   constructor(data: Partial<CharacterSheetModel>) {
-    this.passivePerception = data.passivePerception ?? 0;
-    this.passiveInsight = data.passiveInsight ?? 0;
     this.willOfFire = data.willOfFire ?? 0;
 
     this.name = data.name ?? "Naruto";
