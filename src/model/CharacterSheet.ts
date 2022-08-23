@@ -116,6 +116,50 @@ export class CharacterSheetModel {
       (this.class as any) === "FamiliarSpirit"
     );
   }
+
+  protected get allProficiencies(): Proficiency[] {
+    const proficiencies = [
+      ...this.strengthProficiencies,
+      ...this.dexterityProficiencies,
+      ...this.constitutionProficiencies,
+      ...this.intelligenceProficiencies,
+      ...this.wisdomProficiencies,
+      ...this.charismaProficiencies,
+    ];
+    return proficiencies;
+  }
+
+  private whitespaceRegex = /\s+/g;
+
+  /**
+   * Looks up the `Proficiency` with the given name, returning `undefined` if none is found.
+   * @param name The name of the `Proficiency` to get.
+   * @param p Set a specific boolean value to look for, otherwise this will be ignored.
+   * @param h Set a specific boolean value to look for, otherwise this will be ignored.
+   * @param e Set a specific boolean value to look for, otherwise this will be ignored.
+   * @returns The `Proficiency` with the given name, or `undefined` if no `Proficiency` with that name exists.
+   */
+  public getProficiency(
+    name: string,
+    p?: boolean,
+    h?: boolean,
+    e?: boolean
+  ): Proficiency | undefined {
+    const compareName = name.replace(this.whitespaceRegex, "").toLowerCase();
+    for (const proficiency of this.allProficiencies) {
+      if (
+        proficiency.label.replace(this.whitespaceRegex, "").toLowerCase() ===
+          compareName &&
+        (typeof p === "boolean" ? proficiency.p : true) &&
+        (typeof h === "boolean" ? proficiency.h : true) &&
+        (typeof e === "boolean" ? proficiency.e : true)
+      ) {
+        return proficiency;
+      }
+    }
+
+    return undefined;
+  }
   //#endregion
 
   //#region page 1 section 1
@@ -124,21 +168,19 @@ export class CharacterSheetModel {
   }
 
   public get passivePerception() {
-    for (const proficiency of this.wisdomProficiencies){
-      if (proficiency.label == "Perception") {
-        return 10+ proficiency.value
-      }
+    const perceptionProf = this.getProficiency("Perception");
+    if (perceptionProf) {
+      return 10 + perceptionProf.value;
     }
-      return 10 + this.wisdomDice
+    return 10 + this.wisdomDice;
   }
 
-  public get passiveInsight() {  
-    for (const proficiency of this.wisdomProficiencies){
-      if (proficiency.label == "Perception") {
-        return 10+ proficiency.value
-      }
+  public get passiveInsight() {
+    const perceptionProf = this.getProficiency("Perception");
+    if (perceptionProf) {
+      return 10 + perceptionProf.value;
     }
-      return 10 + this.wisdomDice
+    return 10 + this.wisdomDice;
   }
   public willOfFire: number;
   //#endregion
