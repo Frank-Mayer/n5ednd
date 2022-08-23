@@ -133,3 +133,6 @@ dist
 .yarn
 .pnp.*
 !.yarnrc.yml
+
+# Mac
+.DS_Store

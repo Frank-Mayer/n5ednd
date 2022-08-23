@@ -1,6 +1,6 @@
 import type { CharacterSheetModel } from "./model/CharacterSheet";
 import { getCharacterSheetData } from "./data/CharacterSheetData";
-import { thisUrl, updateChildren } from "./lib/WindowManager";
+import { thisUrl } from "./lib/WindowManager";
 
 const dispatchMap = new Map<
   string,

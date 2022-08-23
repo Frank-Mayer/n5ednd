@@ -17,17 +17,70 @@ $max-page-width: 800px;
   --font-size-regular: calc(var(--page-width) * 0.015);
   --font-size-big: calc(var(--page-width) * 0.045);
   padding: 1rem;
-  background: {
-    color: color.$background;
-    image: url(../img/FlyingThunderGod.webp);
-    size: cover;
-    // image: url(../img/shuriken.svg);
-    // size: 64px;
-    position: center;
-    repeat: repeat;
-    attachment: fixed;
-  }
   color: color.$foreground;
+
+  body::after {
+    content: "";
+    position: fixed; // stretch a fixed position to the whole screen
+    top: 0;
+    height: 100vh; // fix for mobile browser address bar appearing disappearing
+    left: 0;
+    right: 0;
+    z-index: -1; // needed to keep in the background
+    background-image: url(../img/FlyingThunderGod.webp);
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+}
+
+@supports (backdrop-filter: blur(10px)) {
+  div#root > div {
+    backdrop-filter: blur(10px);
+
+    &#toolbar {
+      background-color: rgba(color.$foreground, 0.75);
+    }
+    &:not(#toolbar) {
+      background-color: rgba(color.$background, 0.75);
+    }
+  }
+}
+@supports not (backdrop-filter: blur(10px)) {
+  #root > div {
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+
+    &#toolbar {
+      background-image: linear-gradient(
+          rgba(color.$foreground, 0.75),
+          rgba(color.$foreground, 0.75)
+        ),
+        url(../img/FlyingThunderGod_Blur.webp);
+    }
+    &:not(#toolbar) {
+      background-image: linear-gradient(
+          rgba(color.$background, 0.75),
+          rgba(color.$background, 0.75)
+        ),
+        url(../img/FlyingThunderGod_Blur.webp);
+    }
+  }
+}
+
+@media (min-aspect-ratio: 2232/1600) {
+  body::after,
+  #root > div {
+    background-size: 100vw auto;
+    background-position: center;
+  }
+}
+
+@media (max-aspect-ratio: 2232/1600) {
+  body::after,
+  #root > div {
+    background-size: auto 100vh;
+    background-position: center;
+  }
 }
 
 div#root > input[type="file"] {
@@ -135,30 +188,6 @@ div#root {
     max-width: $max-page-width;
     margin: 0 auto;
     border-radius: 1rem;
-  }
-}
-
-// supports backdrop blur
-@supports (backdrop-filter: blur(10px)) {
-  #root > div {
-    backdrop-filter: blur(10px);
-    &#toolbar {
-      background-color: rgba(color.$foreground, 0.75);
-    }
-    &:not(#toolbar) {
-      background-color: rgba(color.$background, 0.75);
-    }
-  }
-}
-// else
-@supports not (backdrop-filter: blur(10px)) {
-  #root > div {
-    &#toolbar {
-      background-color: color.$foreground;
-    }
-    &:not(#toolbar) {
-      background-color: color.$background;
-    }
   }
 }
 
