@@ -12,6 +12,10 @@
 $max-page-width: 800px;
 
 :root {
+  color-scheme: dark only !important;
+}
+
+:root {
   --page-width: min(#{$max-page-width}, calc(100vw - 2rem));
   --font-size-small: calc(var(--page-width) * 0.01);
   --font-size-regular: calc(var(--page-width) * 0.015);
@@ -45,6 +49,7 @@ $max-page-width: 800px;
     }
   }
 }
+
 @supports not (backdrop-filter: blur(10px)) {
   #root > div {
     background-attachment: fixed;
