@@ -14,7 +14,7 @@
     "@types/service_worker_api": "^0.0.9",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.54.5",
-    "typescript": "^4.7.4"
+    "typescript": "^4.8.2"
   },
   "dependencies": {
     "@frank-mayer/magic": "^4.0.2",
