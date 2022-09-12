@@ -13,7 +13,7 @@
     "@types/react-numeric-input": "^2.2.4",
     "@types/service_worker_api": "^0.0.9",
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.54.5",
+    "sass": "^1.54.9",
     "typescript": "^4.7.4"
   },
   "dependencies": {
