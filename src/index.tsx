@@ -7,6 +7,16 @@ import { Page03 } from "./view/Page03";
 import { Page04 } from "./view/Page04";
 import { Footer } from "./view/Footer";
 
+import { onServiceWorkerCacheUpdated } from "@frank-mayer/service-worker/client";
+
+onServiceWorkerCacheUpdated(() => {
+  if (
+    confirm("A new version of this app is available.\nReload now to update?")
+  ) {
+    window.location.reload();
+  }
+});
+
 const rootEl = document.getElementById("root");
 
 if (!rootEl) {
