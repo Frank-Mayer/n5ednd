@@ -18,7 +18,7 @@
   "dependencies": {
     "@frank-mayer/magic": "^4.0.2",
     "@frank-mayer/service-worker": "^1.2.3",
-    "idb": "^7.0.2",
+    "idb": "^7.1.0",
     "react": "^18.2.0",
     "react-bootstrap-icons": "^1.8.4",
     "react-dom": "^18.2.0",
