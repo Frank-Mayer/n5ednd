@@ -47,6 +47,18 @@ export const Section02 = () => (
               }}
             />
           </label>
+          <label className="range">
+            <span>Range:</span>
+            <input
+              key={key + ".range"}
+              type="text"
+              value={item.range}
+              onChange={(ev) => {
+                item.range = ev.target.value;
+                notifyPropertyChanged();
+              }}
+            />
+          </label>
           <select
             key={key + ".rank"}
             value={item.rank}

@@ -96,12 +96,12 @@
             @include additionalStyles.border;
             height: calc(var(--font-size-big) * 4) !important;
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr 1fr;
+            grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
             grid-template-rows: auto 1fr;
             gap: additionalStyles.$gap;
             grid-template-areas:
-              "remove name castTime rank chakra"
-              "remove description description description description";
+              "remove name castTime rank chakra range"
+              "remove description description description description description";
 
             > .remove {
               grid-area: remove;
@@ -113,7 +113,8 @@
 
             > .name,
             > .chakraCost,
-            > .castTime {
+            > .castTime,
+            > .range {
               width: 100%;
               height: 100%;
               display: grid;
@@ -145,6 +146,10 @@
               resize: none;
               overflow-y: auto;
               background-color: transparent;
+            }
+
+            > .range {
+              grid-area: range;
             }
           }
         }
