@@ -8,19 +8,19 @@
     "clean-windows": "rmdir /Q/S ./.cache & rmdir /Q/S ./dist"
   },
   "devDependencies": {
-    "@types/react": "^18.0.17",
+    "@types/react": "^18.0.21",
     "@types/react-dom": "^18.0.6",
     "@types/react-numeric-input": "^2.2.4",
     "parcel-bundler": "^1.12.5",
-    "sass": "^1.54.9",
-    "typescript": "^4.8.3"
+    "sass": "^1.55.0",
+    "typescript": "^4.8.4"
   },
   "dependencies": {
     "@frank-mayer/magic": "^4.0.2",
     "@frank-mayer/service-worker": "^1.2.3",
-    "idb": "^7.0.2",
+    "idb": "^7.1.0",
     "react": "^18.2.0",
-    "react-bootstrap-icons": "^1.8.4",
+    "react-bootstrap-icons": "^1.9.1",
     "react-dom": "^18.2.0",
     "react-numeric-input": "^2.2.3"
   }
