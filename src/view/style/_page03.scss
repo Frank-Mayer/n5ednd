@@ -96,7 +96,7 @@
             @include additionalStyles.border;
             height: calc(var(--font-size-big) * 4) !important;
             display: grid;
-            grid-template-columns: auto 1fr 1fr 1fr 1fr 1fr;
+            grid-template-columns: auto 2fr 1.5fr 1fr 1fr 1fr;
             grid-template-rows: auto 1fr;
             gap: additionalStyles.$gap;
             grid-template-areas:
