@@ -8,7 +8,7 @@
     "clean-windows": "rmdir /Q/S ./.cache & rmdir /Q/S ./dist"
   },
   "devDependencies": {
-    "@types/react": "^18.0.21",
+    "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.6",
     "@types/react-numeric-input": "^2.2.4",
     "parcel-bundler": "^1.12.5",
